@@ -1,0 +1,108 @@
+﻿@model HotelWizard.Models.RoomBooking
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>RoomBooking</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.checkin, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.checkin)
+                @Html.ValidationMessageFor(model => model.checkin)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.checkout, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.checkout)
+                @Html.ValidationMessageFor(model => model.checkout)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.specialRate, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.specialRate)
+                @Html.ValidationMessageFor(model => model.specialRate)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.roomRate, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.roomRate)
+                @Html.ValidationMessageFor(model => model.roomRate)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.roomType, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.roomType)
+                @Html.ValidationMessageFor(model => model.roomType)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.roomNum, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.roomNum)
+                @Html.ValidationMessageFor(model => model.roomNum)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.numPeople, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.numPeople)
+                @Html.ValidationMessageFor(model => model.numPeople)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.isDepositPaid, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.isDepositPaid)
+                @Html.ValidationMessageFor(model => model.isDepositPaid)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.isCheckedIn, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.isCheckedIn)
+                @Html.ValidationMessageFor(model => model.isCheckedIn)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.customerID, "customerID", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("customerID", String.Empty)
+                @Html.ValidationMessageFor(model => model.customerID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

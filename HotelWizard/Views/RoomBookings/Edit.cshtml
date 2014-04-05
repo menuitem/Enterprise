@@ -1,0 +1,121 @@
+﻿@model HotelWizard.Models.RoomBooking
+@{
+    ViewBag.Title = "Edit";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h3>Room Reservation Details For:</h3>
+        <h3>@Html.DisplayTextFor(model => model.customer.name)</h3>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.RoomBookingId)
+        <!--
+        <div class="form-group">
+            @Html.LabelFor(model => model.customerID, "Name:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("customerID", String.Empty)
+                @Html.ValidationMessageFor(model => model.customerID)
+            </div>
+        </div>
+
+        <hr/>
+        -->
+        @Html.HiddenFor(model => model.customerID
+        )
+        <div class="form-group">
+            @Html.LabelFor(model => model.checkin, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.checkin)
+                @Html.ValidationMessageFor(model => model.checkin)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.checkout, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.checkout)
+                @Html.ValidationMessageFor(model => model.checkout)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.specialRate, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.specialRate)
+                @Html.ValidationMessageFor(model => model.specialRate)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.roomRate, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.roomRate)
+                @Html.ValidationMessageFor(model => model.roomRate)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.roomType, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.roomType)
+                @Html.ValidationMessageFor(model => model.roomType)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.roomNum, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.roomNum)
+                @Html.ValidationMessageFor(model => model.roomNum)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.numPeople, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.numPeople)
+                @Html.ValidationMessageFor(model => model.numPeople)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.isDepositPaid, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.isDepositPaid)
+                @Html.ValidationMessageFor(model => model.isDepositPaid)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.isCheckedIn, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.isCheckedIn)
+                @Html.ValidationMessageFor(model => model.isCheckedIn)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="button" value="Cancel" class="btn btn-default" onclick="goBack()" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script>
+    function goBack() {
+        window.history.back()
+    }
+</script>

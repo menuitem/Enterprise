@@ -1,0 +1,91 @@
+﻿@model IEnumerable<HotelWizard.Models.RoomBooking>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.customer.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.checkin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.checkout)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.roomNum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.roomType)
+        </th>
+        <!--
+        <th>
+            @Html.DisplayNameFor(model => model.specialRate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.roomRate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.numPeople)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isDepositPaid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isCheckedIn)
+        </th>
+        -->
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.customer.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.checkin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.checkout)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.roomNum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.roomType)
+            </td>
+            <!--
+            <td>
+                @Html.DisplayFor(modelItem => item.specialRate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.roomRate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.numPeople)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.isDepositPaid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.isCheckedIn)
+            </td>
+                -->
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.RoomBookingId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.RoomBookingId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.RoomBookingId })
+            </td>
+        </tr>
+    }
+
+</table>

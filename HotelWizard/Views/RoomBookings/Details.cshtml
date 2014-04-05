@@ -1,0 +1,132 @@
+﻿@model HotelWizard.Models.RoomBooking
+@{
+    ViewBag.Title = "Details";
+}
+
+<div>
+    <h3>Room Reservation Details For:</h3>
+    <h3>@Html.DisplayTextFor(model => model.customer.firstname) @Html.DisplayTextFor(model => model.customer.name)</h3>
+    <hr />
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.customer.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.customer.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.checkin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.checkin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.checkout)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.checkout)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.specialRate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.specialRate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.roomRate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.roomRate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.roomType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.roomType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.roomNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.roomNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.numPeople)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.numPeople)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isDepositPaid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isDepositPaid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isCheckedIn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isCheckedIn)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.costs.totalCost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.costs.totalCost)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.costs.depositDue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.costs.depositDue)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.costs.depositPaid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.costs.depositPaid)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.costs.balanceDue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.costs.balanceDue)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.RoomBookingId }, new { @class = "btn btn-default" }) |
+    @Html.ActionLink("Delete", "Delete", new { id = Model.RoomBookingId }, new { @class = "btn btn-default" }) |
+    <input type="submit" value="Back" class="btn btn-default" onclick="goBack()" />
+
+</p>
+<script>
+    function goBack() {
+        window.history.back()
+    }
+</script>

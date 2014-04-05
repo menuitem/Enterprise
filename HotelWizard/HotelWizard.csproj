@@ -160,6 +160,8 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ReservationCustomersController.cs" />
+    <Compile Include="Controllers\RoomBookingsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -167,9 +169,20 @@
     <Compile Include="Migrations\201404051130214_registration.Designer.cs">
       <DependentUpon>201404051130214_registration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201404051834446_customer_and_roomBooking.cs" />
+    <Compile Include="Migrations\201404051834446_customer_and_roomBooking.Designer.cs">
+      <DependentUpon>201404051834446_customer_and_roomBooking.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201404051919118_update.cs" />
+    <Compile Include="Migrations\201404051919118_update.Designer.cs">
+      <DependentUpon>201404051919118_update.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\RoomCustomer.cs" />
+    <Compile Include="Models\RoomBooking.cs" />
+    <Compile Include="Models\RoomCosts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -220,6 +233,18 @@
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Account\UserRoles.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\SelectRoleEditorViewModel.cshtml" />
+    <Content Include="Views\RoomBookings\Create.cshtml" />
+    <Content Include="Views\RoomBookings\Delete.cshtml" />
+    <Content Include="Views\RoomBookings\Details.cshtml" />
+    <Content Include="Views\RoomBookings\Edit.cshtml" />
+    <Content Include="Views\RoomBookings\Index.cshtml" />
+    <Content Include="Views\ReservationCustomers\Create.cshtml" />
+    <Content Include="Views\ReservationCustomers\Delete.cshtml" />
+    <Content Include="Views\ReservationCustomers\Details.cshtml" />
+    <Content Include="Views\ReservationCustomers\Edit.cshtml" />
+    <Content Include="Views\ReservationCustomers\Index.cshtml" />
+    <Content Include="Views\ReservationCustomers\Search.cshtml" />
+    <Content Include="Views\ReservationCustomers\Results.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -234,6 +259,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201404051130214_registration.resx">
       <DependentUpon>201404051130214_registration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201404051834446_customer_and_roomBooking.resx">
+      <DependentUpon>201404051834446_customer_and_roomBooking.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201404051919118_update.resx">
+      <DependentUpon>201404051919118_update.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
