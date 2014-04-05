@@ -49,6 +49,12 @@ namespace HotelWizard.Controllers
                 if (user != null)
                 {
                     await SignInAsync(user, model.RememberMe);
+                    var roles = UserManager.GetRoles(user.Id);
+                    if (roles.Contains("Admin"))
+                    {
+                        return RedirectToAction("Index", "Account");
+
+                    }
                     return RedirectToLocal(returnUrl);
                 }
                 else
