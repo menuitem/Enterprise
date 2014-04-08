@@ -159,6 +159,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminConfigController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ReservationCustomersController.cs" />
     <Compile Include="Controllers\RoomBookingsController.cs" />
@@ -177,8 +178,13 @@
     <Compile Include="Migrations\201404051919118_update.Designer.cs">
       <DependentUpon>201404051919118_update.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201404082036402_added_AdminConfig_table.cs" />
+    <Compile Include="Migrations\201404082036402_added_AdminConfig_table.Designer.cs">
+      <DependentUpon>201404082036402_added_AdminConfig_table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AdminConfig.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\RoomCustomer.cs" />
     <Compile Include="Models\RoomBooking.cs" />
@@ -245,6 +251,11 @@
     <Content Include="Views\ReservationCustomers\Index.cshtml" />
     <Content Include="Views\ReservationCustomers\Search.cshtml" />
     <Content Include="Views\ReservationCustomers\Results.cshtml" />
+    <Content Include="Views\AdminConfig\Create.cshtml" />
+    <Content Include="Views\AdminConfig\Delete.cshtml" />
+    <Content Include="Views\AdminConfig\Details.cshtml" />
+    <Content Include="Views\AdminConfig\Edit.cshtml" />
+    <Content Include="Views\AdminConfig\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -265,6 +276,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201404051919118_update.resx">
       <DependentUpon>201404051919118_update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201404082036402_added_AdminConfig_table.resx">
+      <DependentUpon>201404082036402_added_AdminConfig_table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
