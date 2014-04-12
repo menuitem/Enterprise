@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Create";
+    var custid = (String) ViewBag.customerID.ToString();
 }
 
 <h2>Create</h2>
@@ -11,10 +12,18 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>RoomBooking</h4>
+        <h3>Room Reservation Details For:</h3>
+        <h3>@custid</h3>
         <hr />
+        
         @Html.ValidationSummary(true)
+        @Html.TextBox("customerID", custid)
+        @Html.Hidden("customerID", custid)
 
+
+        
+     
+           
         <div class="form-group">
             @Html.LabelFor(model => model.checkin, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -87,13 +96,7 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.customerID, "customerID", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("customerID", String.Empty)
-                @Html.ValidationMessageFor(model => model.customerID)
-            </div>
-        </div>
+        
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

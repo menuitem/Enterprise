@@ -57,7 +57,7 @@ namespace HotelWizard.Controllers
             {
                 db.RoomCustomers.Add(roomcustomer);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details/"+roomcustomer.ID);
             }
 
             return View(roomcustomer);

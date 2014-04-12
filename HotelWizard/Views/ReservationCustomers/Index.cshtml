@@ -61,6 +61,7 @@
         {
             <tr>
                 <td>No Bookings for this customer!</td>
+                <td>@Html.ActionLink("Create new booking", "Create", "RoomBookings", new { id = customer.ID }, null)</td>
             </tr>
         }
         @foreach (var item in customer.Bookings)
@@ -101,6 +102,7 @@
                 <td>
                     @Html.ActionLink("View Booking Details", "Details", "RoomBookings",
                             new { id = item.RoomBookingId }, null) |
+                    @Html.ActionLink("Create new booking", "Create", "RoomBookings", new { id = customer.ID }, null) |
                     @Html.ActionLink("Delete Booking", "Delete", "RoomBookings", new { id = item.RoomBookingId }, null)
                 </td>
                 <!--create a new room booking for a given customer-->

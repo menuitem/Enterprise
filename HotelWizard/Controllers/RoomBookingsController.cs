@@ -19,7 +19,7 @@ namespace HotelWizard.Controllers
         // GET: /RoomBookings/
         public async Task<ActionResult> Index()
         {
-            var roomNumber = db.AdminConfig.First().NumOfRooms;
+            //var roomNumber = db.AdminConfig.First().NumOfRooms;
             var roombookings = db.RoomBookings.Include(r => r.customer);
             return View(await roombookings.ToListAsync());
         }
@@ -55,14 +55,15 @@ namespace HotelWizard.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include="RoomBookingId,checkin,checkout,specialRate,roomRate,roomType,roomNum,numPeople,isDepositPaid,isCheckedIn,customerID")] RoomBooking roombooking)
         {
+ 
             if (ModelState.IsValid)
             {
                 db.RoomBookings.Add(roombooking);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "ReservationCustomers", new { id = roombooking.customerID });
             }
 
-            ViewBag.customerID = new SelectList(db.RoomCustomers, "ID", "name", roombooking.customerID);
+            ViewBag.customerID = roombooking.customerID;
             return View(roombooking);
         }
 
@@ -89,11 +90,12 @@ namespace HotelWizard.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include="RoomBookingId,checkin,checkout,specialRate,roomRate,roomType,roomNum,numPeople,isDepositPaid,isCheckedIn,customerID")] RoomBooking roombooking)
         {
+            
             if (ModelState.IsValid)
             {
                 db.Entry(roombooking).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "ReservationCustomers", new { id = roombooking.customerID });
             }
             ViewBag.customerID = new SelectList(db.RoomCustomers, "ID", "name", roombooking.customerID);
             return View(roombooking);
@@ -120,9 +122,11 @@ namespace HotelWizard.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             RoomBooking roombooking = await db.RoomBookings.FindAsync(id);
+            //save customer id before deleting, for redirect
+            var customerid = roombooking.customerID;
             db.RoomBookings.Remove(roombooking);
             await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", "ReservationCustomers", new { id = roombooking.customerID });
         }
 
         protected override void Dispose(bool disposing)
