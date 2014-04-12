@@ -12,10 +12,16 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.numRooms)
+            @Html.DisplayNameFor(model => model.HotelName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.numTables)
+            @Html.DisplayNameFor(model => model.HotelAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumOfRooms)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumOfTables)
         </th>
         <th></th>
     </tr>
@@ -23,10 +29,16 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.numRooms)
+            @Html.DisplayFor(modelItem => item.HotelName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.numTables)
+            @Html.DisplayFor(modelItem => item.HotelAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumOfRooms)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumOfTables)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.AdminConfigId }) |

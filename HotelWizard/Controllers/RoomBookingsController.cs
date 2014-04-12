@@ -14,10 +14,12 @@ namespace HotelWizard.Controllers
     public class RoomBookingsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+             
 
         // GET: /RoomBookings/
         public async Task<ActionResult> Index()
         {
+            var roomNumber = db.AdminConfig.First().NumOfRooms;
             var roombookings = db.RoomBookings.Include(r => r.customer);
             return View(await roombookings.ToListAsync());
         }

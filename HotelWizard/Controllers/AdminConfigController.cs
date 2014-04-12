@@ -16,12 +16,14 @@ namespace HotelWizard.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: /AdminConfig/
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Index()
         {
             return View(await db.AdminConfig.ToListAsync());
         }
 
         // GET: /AdminConfig/Details/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -37,6 +39,7 @@ namespace HotelWizard.Controllers
         }
 
         // GET: /AdminConfig/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -47,7 +50,8 @@ namespace HotelWizard.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include="AdminConfigId,numRooms,numTables")] AdminConfig adminconfig)
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> Create([Bind(Include="AdminConfigId,HotelName,HotelAddress,NumOfRooms,NumOfTables")] AdminConfig adminconfig)
         {
             if (ModelState.IsValid)
             {
@@ -60,6 +64,8 @@ namespace HotelWizard.Controllers
         }
 
         // GET: /AdminConfig/Edit/5
+        [Authorize(Roles = "Admin")]
+
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -79,7 +85,8 @@ namespace HotelWizard.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include="AdminConfigId,numRooms,numTables")] AdminConfig adminconfig)
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> Edit([Bind(Include="AdminConfigId,HotelName,HotelAddress,NumOfRooms,NumOfTables")] AdminConfig adminconfig)
         {
             if (ModelState.IsValid)
             {
@@ -91,6 +98,7 @@ namespace HotelWizard.Controllers
         }
 
         // GET: /AdminConfig/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -108,6 +116,7 @@ namespace HotelWizard.Controllers
         // POST: /AdminConfig/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             AdminConfig adminconfig = await db.AdminConfig.FindAsync(id);

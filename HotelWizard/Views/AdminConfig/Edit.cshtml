@@ -17,18 +17,34 @@
         @Html.HiddenFor(model => model.AdminConfigId)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.numRooms, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.HotelName, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.numRooms)
-                @Html.ValidationMessageFor(model => model.numRooms)
+                @Html.EditorFor(model => model.HotelName)
+                @Html.ValidationMessageFor(model => model.HotelName)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.numTables, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.HotelAddress, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.numTables)
-                @Html.ValidationMessageFor(model => model.numTables)
+                @Html.EditorFor(model => model.HotelAddress)
+                @Html.ValidationMessageFor(model => model.HotelAddress)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NumOfRooms, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NumOfRooms)
+                @Html.ValidationMessageFor(model => model.NumOfRooms)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NumOfTables, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NumOfTables)
+                @Html.ValidationMessageFor(model => model.NumOfTables)
             </div>
         </div>
 

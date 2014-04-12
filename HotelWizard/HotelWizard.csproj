@@ -182,6 +182,10 @@
     <Compile Include="Migrations\201404082036402_added_AdminConfig_table.Designer.cs">
       <DependentUpon>201404082036402_added_AdminConfig_table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201404091600339_UpdatingAdminConig.cs" />
+    <Compile Include="Migrations\201404091600339_UpdatingAdminConig.Designer.cs">
+      <DependentUpon>201404091600339_UpdatingAdminConig.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminConfig.cs" />
@@ -196,7 +200,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Models\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
@@ -261,9 +265,9 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Models\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Models\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Models\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
@@ -279,6 +283,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201404082036402_added_AdminConfig_table.resx">
       <DependentUpon>201404082036402_added_AdminConfig_table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201404091600339_UpdatingAdminConig.resx">
+      <DependentUpon>201404091600339_UpdatingAdminConig.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

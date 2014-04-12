@@ -26,6 +26,7 @@
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     @if (User.IsInRole("Admin"))
                     {
+                        <li>@Html.ActionLink("HotelConfigurations", "Index", "AdminConfig")</li>
                         <li>@Html.ActionLink("Users", "Index", "Account")</li>
                     }
                 </ul>
