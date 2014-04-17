@@ -11,7 +11,8 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Room</h4>
+        <h4>Create Rooms</h4>
+        <h3>Max number of rooms to be created is @ViewBag.numRooms</h3>
         <hr />
         @Html.ValidationSummary(true)
 
