@@ -94,6 +94,15 @@ namespace HotelWizard.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
+
+            //confing details are also part of a singleton class
+            //so the attributes of this class must also be updated
+            ConfigSingleton config = ConfigSingleton.Instance;
+            config.setNumRooms(adminconfig.NumOfRooms);
+            config.setNumTables(adminconfig.NumOfTables);
+            config.setHotelName(adminconfig.HotelName);
+            config.setHotelAddress(adminconfig.HotelAddress);
+
             return View(adminconfig);
         }
 

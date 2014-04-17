@@ -39,6 +39,16 @@ namespace HotelWizard.Models
             this.numTables = numTables;
         }
 
+        public void setHotelName(string hotelName)
+        {
+            this.hotelName = hotelName;
+        }
+
+        public void setHotelAddress(string hotelAddress)
+        {
+            this.hotelAddress = hotelAddress;
+        }
+
         public void getDetails(){
             //initialize the attributes by retrieveing data from the database
             AdminConfig adminconfig = AdminConfig.getDetails();
