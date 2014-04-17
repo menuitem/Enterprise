@@ -52,3 +52,15 @@ input[type="checkbox"].input-validation-error {
     border: 0;
     border-top: 1px solid black;
 }
+
+#logo {
+    width: 90px;
+    height: 90px;
+    float: left;
+}
+
+.small-logo {
+    width: 50px;
+    height: 50px;
+    float: left;
+}

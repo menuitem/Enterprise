@@ -9,6 +9,9 @@ namespace HotelWizard.Models
     {
         public int numRooms;
         public int numTables;
+        public string hotelName;
+        public string hotelAddress;
+
         private static ConfigSingleton configInstance;
         private ConfigSingleton() 
         {
@@ -43,6 +46,8 @@ namespace HotelWizard.Models
             {
                 this.numRooms = adminconfig.NumOfRooms;
                 this.numTables = adminconfig.NumOfTables;
+                this.hotelName = adminconfig.HotelName;
+                this.hotelAddress = adminconfig.HotelAddress;
             }
         }
 
