@@ -42,6 +42,7 @@ namespace HotelWizard.Controllers
             //the number of rooms is stored in a singleton class called 'config'
             //this singleton class gets it's attirbutes set when application starts.
             //but a check should be done, and if not set then get details from database
+
             var numRooms = ConfigSingleton.Instance.numRooms;         
             if (numRooms == null)
             {
