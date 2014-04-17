@@ -13,6 +13,7 @@
     <div class="form-horizontal">
         <h4>Create Rooms</h4>
         <h3>Max number of rooms to be created is @ViewBag.numRooms</h3>
+        <h4 style="color:red;">@ViewBag.errormsg</h4>
         <hr />
         @Html.ValidationSummary(true)
 

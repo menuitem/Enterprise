@@ -42,13 +42,15 @@ namespace HotelWizard.Controllers
             //the number of rooms is stored in a singleton class called 'config'
             //this singleton class gets it's attirbutes set when application starts.
             //but a check should be done, and if not set then get details from database
-            var numRooms = ConfigSingleton.Instance.numRooms;
+            var numRooms = ConfigSingleton.Instance.numRooms;         
             if (numRooms == null)
             {
                 ConfigSingleton config = ConfigSingleton.Instance;
-                config.getDetails();
-                ViewBag.numRooms = config.numRooms;
-            }         
+                config.getDetails();              
+                numRooms = config.numRooms;
+            }
+
+            ViewBag.numRooms = numRooms;
             return View();
         }
 
@@ -73,6 +75,7 @@ namespace HotelWizard.Controllers
                 }
                 if (room.roomNum > numRooms)
                 {
+                    ViewBag.errormsg = "you are trying to add a room number that is too large for your hotel!";
                     return View(room);
                 }
                 

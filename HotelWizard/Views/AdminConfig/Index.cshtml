@@ -4,48 +4,60 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Admin Panel</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.HotelName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HotelAddress)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NumOfRooms)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NumOfTables)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.HotelName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HotelAddress)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NumOfRooms)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NumOfTables)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.AdminConfigId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.AdminConfigId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.AdminConfigId })
-        </td>
-    </tr>
+@foreach (var item in Model)
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.HotelName)
+            </th>
+            <td>
+                @Html.DisplayFor(modelItem => item.HotelName)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.HotelAddress)
+            </th>
+            <td>
+                @Html.DisplayFor(modelItem => item.HotelAddress)
+            </td>
+        </tr>
+    </table>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NumOfRooms)
+            </th>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumOfRooms)
+            </td>
+        <tr>
+    </table>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NumOfTables)
+            </th>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumOfTables)
+            </td>
+        </tr>
+    </table>
+    <table class="table">
+        <tr>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.AdminConfigId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.AdminConfigId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.AdminConfigId })
+            </td>
+        </tr>
+    </table>
 }
 
-</table>
+
