@@ -49,29 +49,12 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.roomRate, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.room.RoomId, "room number", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.roomRate)
-                @Html.ValidationMessageFor(model => model.roomRate)
+                @Html.DropDownList("roomID", String.Empty)
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.roomType, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.roomType)
-                @Html.ValidationMessageFor(model => model.roomType)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.roomNum, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.roomNum)
-                @Html.ValidationMessageFor(model => model.roomNum)
-            </div>
-        </div>
-
+       
         <div class="form-group">
             @Html.LabelFor(model => model.numPeople, new { @class = "control-label col-md-2" })
             <div class="col-md-10">

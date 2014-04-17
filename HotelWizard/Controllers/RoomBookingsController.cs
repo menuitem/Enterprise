@@ -13,13 +13,13 @@ namespace HotelWizard.Controllers
 {
     public class RoomBookingsController : Controller
     {
+              
         private ApplicationDbContext db = new ApplicationDbContext();
-             
+         
 
         // GET: /RoomBookings/
         public async Task<ActionResult> Index()
         {
-            //var roomNumber = db.AdminConfig.First().NumOfRooms;
             var roombookings = db.RoomBookings.Include(r => r.customer);
             return View(await roombookings.ToListAsync());
         }
@@ -40,11 +40,35 @@ namespace HotelWizard.Controllers
             return View(roombooking);
         }
 
+        public ActionResult CheckAvailability(int? id){
+
+
+            return RedirectToAction("Details", "ReservationCustomers", new { id = id });
+        }
+
         // GET: /RoomBookings/Create
         public ActionResult Create(int? id)
         {
-            //ViewBag.customerID = new SelectList(db.RoomCustomers, "ID", "name");
+            //string query = "SELECT * FROM Rooms";
+            //System.Data.Entity.Infrastructure.DbRawSqlQuery<Room> data = db.Rooms.SqlQuery(query);
+            //List<int> mylist = new List<int>();
+
+            //foreach (Room e in data.ToList())
+            //{
+            //    mylist.Add(e.RoomId);
+            //}     
+
+            //DateTime start = new DateTime(2014, 04, 19);
+            //DateTime end = new DateTime(2014, 04, 21);
+            //SelectList test = Room.getFreeRooms(start, end);
+            //System.Diagnostics.Debug.WriteLine(test.DataTextField);
+
+
+            //ViewBag.roomID = Room.getFreeRooms();
+            //ViewBag.roomID = Room.getEmptyRooms();
             ViewBag.customerID = id;
+            //System.Diagnostics.Debug.WriteLine("here...................");
+    
             return View();
         }
 
@@ -53,9 +77,9 @@ namespace HotelWizard.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include="RoomBookingId,checkin,checkout,specialRate,roomRate,roomType,roomNum,numPeople,isDepositPaid,isCheckedIn,customerID")] RoomBooking roombooking)
+        public async Task<ActionResult> Create([Bind(Include="RoomBookingId,checkin,checkout,specialRate,RoomId,numPeople,isDepositPaid,isCheckedIn,customerID")] RoomBooking roombooking)
         {
- 
+            
             if (ModelState.IsValid)
             {
                 db.RoomBookings.Add(roombooking);
@@ -63,7 +87,20 @@ namespace HotelWizard.Controllers
                 return RedirectToAction("Details", "ReservationCustomers", new { id = roombooking.customerID });
             }
 
+
+            string query = "SELECT * FROM Rooms";
+            System.Data.Entity.Infrastructure.DbRawSqlQuery<Room> data = db.Rooms.SqlQuery(query);
+            List<int> mylist = new List<int>();
+
+            foreach (Room e in data.ToList())
+            {
+                mylist.Add(e.RoomId);
+            }
+
+            ViewBag.roomID = new SelectList(mylist);
+            
             ViewBag.customerID = roombooking.customerID;
+            
             return View(roombooking);
         }
 
@@ -79,7 +116,9 @@ namespace HotelWizard.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.customerID = new SelectList(db.RoomCustomers, "ID", "name", roombooking.customerID);
+
+            //ViewBag.roomID = Room.getAllRooms();
+            //ViewBag.customerID = new SelectList(db.RoomCustomers, "ID", "name", roombooking.customerID);
             return View(roombooking);
         }
 
@@ -88,7 +127,7 @@ namespace HotelWizard.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include="RoomBookingId,checkin,checkout,specialRate,roomRate,roomType,roomNum,numPeople,isDepositPaid,isCheckedIn,customerID")] RoomBooking roombooking)
+        public async Task<ActionResult> Edit([Bind(Include = "RoomBookingId,checkin,checkout,specialRate,numPeople,isDepositPaid,isCheckedIn,customerID")] RoomBooking roombooking)
         {
             
             if (ModelState.IsValid)
@@ -97,7 +136,7 @@ namespace HotelWizard.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Details", "ReservationCustomers", new { id = roombooking.customerID });
             }
-            ViewBag.customerID = new SelectList(db.RoomCustomers, "ID", "name", roombooking.customerID);
+            //ViewBag.customerID = new SelectList(db.RoomCustomers, "ID", "name", roombooking.customerID);
             return View(roombooking);
         }
 

@@ -3,7 +3,7 @@
     ViewBag.Title = "Accommodation Reservations for " + Model.name;
 }
 
-<h2>Details of Reservations for @Model.name</h2>
+<h2>Details of Reservations for @Model.firstname @Model.name</h2>
 
 <div>
     <hr />
@@ -36,6 +36,13 @@
             <td>
                 @Html.DisplayFor(model => model.nationality)
             </td>
+            <td>
+
+            </td>
+            <td>
+                @Html.ActionLink("Edit Customer Details", "Edit", new { id = Model.ID }) |
+                @Html.ActionLink("Delete Customer", "Delete", new { id = Model.ID })
+            </td>
         </tr>
     </table>
 
@@ -50,12 +57,6 @@
             <th>Check-out Date</th>
             <th>No. of People</th>
             <th>Room Type</th>
-            <th>Room Number</th>
-            <th>Room Rate</th>
-            <th>Total Cost</th>
-            <th>Deposit Due</th>
-            <th>Deposit Paid</th>
-            <th>Balance Due</th>
         </tr>
         @foreach (var item in Model.Bookings)
         {
@@ -70,25 +71,13 @@
                     @Html.DisplayFor(modelItem => item.numPeople)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.roomType)
+                    @Html.DisplayFor(modelItem => item.room.roomType)
                 </td>
+              
                 <td>
-                    @Html.DisplayFor(modelItem => item.roomNum)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.roomRate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.costs.totalCost)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.costs.depositDue)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.costs.depositPaid)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.costs.balanceDue)
+                    @Html.ActionLink("View Booking Details", "Details", "RoomBookings",
+                            new { id = item.RoomBookingId }, null) |
+                    @Html.ActionLink("Delete Booking", "Delete", "RoomBookings", new { id = item.RoomBookingId }, null)
                 </td>
             </tr>
         }
@@ -96,6 +85,5 @@
     }
         </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to Reservations Home Page", "Index")
 </p>

@@ -156,6 +156,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\LoadAdminConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -163,6 +164,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ReservationCustomersController.cs" />
     <Compile Include="Controllers\RoomBookingsController.cs" />
+    <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -186,10 +188,24 @@
     <Compile Include="Migrations\201404091600339_UpdatingAdminConig.Designer.cs">
       <DependentUpon>201404091600339_UpdatingAdminConig.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201404151753225_add_room_table.cs" />
+    <Compile Include="Migrations\201404151753225_add_room_table.Designer.cs">
+      <DependentUpon>201404151753225_add_room_table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201404151806061_change_roombooking_table.cs" />
+    <Compile Include="Migrations\201404151806061_change_roombooking_table.Designer.cs">
+      <DependentUpon>201404151806061_change_roombooking_table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201404152039403_add_roomid_to_roombooking.cs" />
+    <Compile Include="Migrations\201404152039403_add_roomid_to_roombooking.Designer.cs">
+      <DependentUpon>201404152039403_add_roomid_to_roombooking.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminConfig.cs" />
+    <Compile Include="App_Start\ConfigSingleton.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Room.cs" />
     <Compile Include="Models\RoomCustomer.cs" />
     <Compile Include="Models\RoomBooking.cs" />
     <Compile Include="Models\RoomCosts.cs" />
@@ -260,8 +276,14 @@
     <Content Include="Views\AdminConfig\Details.cshtml" />
     <Content Include="Views\AdminConfig\Edit.cshtml" />
     <Content Include="Views\AdminConfig\Index.cshtml" />
+    <Content Include="Views\Room\Create.cshtml" />
+    <Content Include="Views\Room\Delete.cshtml" />
+    <Content Include="Views\Room\Details.cshtml" />
+    <Content Include="Views\Room\Edit.cshtml" />
+    <Content Include="Views\Room\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Code\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
@@ -286,6 +308,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201404091600339_UpdatingAdminConig.resx">
       <DependentUpon>201404091600339_UpdatingAdminConig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201404151753225_add_room_table.resx">
+      <DependentUpon>201404151753225_add_room_table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201404151806061_change_roombooking_table.resx">
+      <DependentUpon>201404151806061_change_roombooking_table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201404152039403_add_roomid_to_roombooking.resx">
+      <DependentUpon>201404152039403_add_roomid_to_roombooking.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

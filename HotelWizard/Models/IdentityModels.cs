@@ -29,6 +29,7 @@ namespace HotelWizard.Models
         public System.Data.Entity.DbSet<HotelWizard.Models.EditUserViewModel> EditUserViewModels { get; set; }
         public System.Data.Entity.DbSet<HotelWizard.Models.RoomCustomer> RoomCustomers { get; set; }
         public System.Data.Entity.DbSet<HotelWizard.Models.RoomBooking> RoomBookings { get; set; }
+        public System.Data.Entity.DbSet<HotelWizard.Models.Room> Rooms { get; set; }
         public System.Data.Entity.DbSet<HotelWizard.Models.AdminConfig> AdminConfig { get; set; }
     }
 

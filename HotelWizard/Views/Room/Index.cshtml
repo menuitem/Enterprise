@@ -1,0 +1,45 @@
+﻿@model IEnumerable<HotelWizard.Models.Room>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.roomNum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.roomRate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.roomType)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.roomNum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.roomRate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.roomType)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.RoomId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.RoomId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.RoomId })
+        </td>
+    </tr>
+}
+
+</table>

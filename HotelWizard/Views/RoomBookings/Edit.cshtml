@@ -13,17 +13,7 @@
         <hr />
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.RoomBookingId)
-        <!--
-        <div class="form-group">
-            @Html.LabelFor(model => model.customerID, "Name:", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("customerID", String.Empty)
-                @Html.ValidationMessageFor(model => model.customerID)
-            </div>
-        </div>
-
-        <hr/>
-        -->
+    
         @Html.HiddenFor(model => model.customerID)
         <div class="form-group">
             @Html.LabelFor(model => model.checkin, new { @class = "control-label col-md-2" })
@@ -50,28 +40,22 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.roomRate, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.room.roomRate, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.roomRate)
-                @Html.ValidationMessageFor(model => model.roomRate)
+                @Html.EditorFor(model => model.room.roomRate)
+                @Html.ValidationMessageFor(model => model.room.roomRate)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.roomType, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.room.roomType, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.roomType)
-                @Html.ValidationMessageFor(model => model.roomType)
+                @Html.EditorFor(model => model.room.roomType)
+                @Html.ValidationMessageFor(model => model.room.roomType)
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.roomNum, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.roomNum)
-                @Html.ValidationMessageFor(model => model.roomNum)
-            </div>
-        </div>
+ 
 
         <div class="form-group">
             @Html.LabelFor(model => model.numPeople, new { @class = "control-label col-md-2" })

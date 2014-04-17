@@ -13,5 +13,16 @@ namespace HotelWizard.Models
         public string HotelAddress { get; set; }
         public int NumOfRooms { get; set; }
         public int NumOfTables { get; set; }
+
+        public static AdminConfig getDetails()
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            //there should only be one row for this table
+            AdminConfig adminconfig = db.AdminConfig.Find(1);
+ 
+            return adminconfig;
+        }  
     }
+
+     
 }
