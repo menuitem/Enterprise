@@ -272,8 +272,8 @@
     <Content Include="Views\ReservationCustomers\Search.cshtml" />
     <Content Include="Views\ReservationCustomers\Results.cshtml" />
     <Content Include="Views\AdminConfig\Create.cshtml" />
-    <Content Include="Views\AdminConfig\Delete.cshtml" />
-    <Content Include="Views\AdminConfig\Details.cshtml" />
+    <Content Include="Views\AdminConfig\xxDelete.cshtml" />
+    <Content Include="Views\AdminConfig\xxDetails.cshtml" />
     <Content Include="Views\AdminConfig\Edit.cshtml" />
     <Content Include="Views\AdminConfig\Index.cshtml" />
     <Content Include="Views\Room\Create.cshtml" />

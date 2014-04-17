@@ -16,45 +16,41 @@
             <th>
                 @Html.DisplayNameFor(model => model.HotelName)
             </th>
-            <td>
-                @Html.DisplayFor(modelItem => item.HotelName)
-            </td>
-        </tr>
-        <tr>
             <th>
                 @Html.DisplayNameFor(model => model.HotelAddress)
             </th>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.HotelName)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.HotelAddress)
             </td>
-        </tr>
+        </tr>         
     </table>
     <table class="table">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.NumOfRooms)
             </th>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumOfRooms)
-            </td>
-        <tr>
-    </table>
-    <table class="table">
-        <tr>
             <th>
                 @Html.DisplayNameFor(model => model.NumOfTables)
             </th>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumOfRooms)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.NumOfTables)
             </td>
-        </tr>
+        <tr>
     </table>
     <table class="table">
         <tr>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.AdminConfigId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.AdminConfigId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.AdminConfigId })
             </td>
         </tr>
     </table>
