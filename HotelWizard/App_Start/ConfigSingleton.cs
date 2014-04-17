@@ -12,13 +12,7 @@ namespace HotelWizard.Models
         private static ConfigSingleton configInstance;
         private ConfigSingleton() 
         {
-            //initialize the attributes by retrieveing data from the database
-            AdminConfig adminconfig = AdminConfig.getDetails();
-            if (adminconfig != null)
-            {
-                this.numRooms = adminconfig.NumOfRooms;
-                this.numTables = adminconfig.NumOfTables;
-            }
+            getDetails();
         }
 
         public static ConfigSingleton Instance
@@ -40,6 +34,16 @@ namespace HotelWizard.Models
         public void setNumTables(int numTables)
         {
             this.numTables = numTables;
+        }
+
+        public void getDetails(){
+            //initialize the attributes by retrieveing data from the database
+            AdminConfig adminconfig = AdminConfig.getDetails();
+            if (adminconfig != null)
+            {
+                this.numRooms = adminconfig.NumOfRooms;
+                this.numTables = adminconfig.NumOfTables;
+            }
         }
 
         

@@ -14,8 +14,7 @@ namespace HotelWizard.Controllers
     public class RoomController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-        //public int numRooms = db.AdminConfig.First().NumOfRooms;
-
+  
         // GET: /Room/
         public async Task<ActionResult> Index()
         {
@@ -40,6 +39,16 @@ namespace HotelWizard.Controllers
         // GET: /Room/Create
         public ActionResult Create()
         {
+            //the number of rooms is stored in a singleton class called 'config'
+            //this singleton class gets it's attirbutes set when application starts.
+            //but a check should be done, and if not set then get details from database
+            var numRooms = ConfigSingleton.Instance.numRooms;
+            if (numRooms == null)
+            {
+                ConfigSingleton config = ConfigSingleton.Instance;
+                config.getDetails();
+                ViewBag.numRooms = config.numRooms;
+            }         
             return View();
         }
 
@@ -52,6 +61,21 @@ namespace HotelWizard.Controllers
         {
             if (ModelState.IsValid)
             {
+                //can only create rooms up to the no. of rooms in the hotel
+                //the number of rooms is stored in a singleton class called 'config'
+                //this singleton class gets it's attirbutes set when application starts.
+                //but a check should be done, and if not set then get details from database
+                var numRooms = ConfigSingleton.Instance.numRooms;
+                if (numRooms == null)
+                {
+                    ConfigSingleton config = ConfigSingleton.Instance;
+                    config.getDetails();
+                }
+                if (room.roomNum > numRooms)
+                {
+                    return View(room);
+                }
+                
                 db.Rooms.Add(room);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
