@@ -92,16 +92,16 @@ namespace HotelWizard.Controllers
             {
                 db.Entry(adminconfig).State = EntityState.Modified;
                 await db.SaveChangesAsync();
+                //config details are also part of a singleton class
+                //so the attributes of this class must also be updated
+                ConfigSingleton config = ConfigSingleton.Instance;
+                config.setNumRooms(adminconfig.NumOfRooms);
+                config.setNumTables(adminconfig.NumOfTables);
+                config.setHotelName(adminconfig.HotelName);
+                config.setHotelAddress(adminconfig.HotelAddress);
+
                 return RedirectToAction("Index");
             }
-
-            //confing details are also part of a singleton class
-            //so the attributes of this class must also be updated
-            ConfigSingleton config = ConfigSingleton.Instance;
-            config.setNumRooms(adminconfig.NumOfRooms);
-            config.setNumTables(adminconfig.NumOfTables);
-            config.setHotelName(adminconfig.HotelName);
-            config.setHotelAddress(adminconfig.HotelAddress);
 
             return View(adminconfig);
         }

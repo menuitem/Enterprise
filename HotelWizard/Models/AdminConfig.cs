@@ -18,10 +18,31 @@ namespace HotelWizard.Models
         {
             ApplicationDbContext db = new ApplicationDbContext();
             //there should only be one row for this table
-            AdminConfig adminconfig = db.AdminConfig.Find(1);
- 
-            return adminconfig;
-        }  
+            try
+            {
+                AdminConfig adminconfig = db.AdminConfig.Find(1);
+                return adminconfig;
+            }
+            catch (Exception)
+            {   
+                //throw an exception if the tablle has no entry
+                throw;
+            }
+                       
+        }
+
+        public static void createInitialEntry(string hotelName, string hotelAddress, int numRooms, int numTables)
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            AdminConfig initial = new AdminConfig();
+            initial.HotelName = hotelName;
+            initial.HotelAddress = hotelAddress;
+            initial.NumOfRooms = numRooms;
+            initial.NumOfTables = numTables;
+            System.Diagnostics.Debug.WriteLine("here............");
+            db.SaveChangesAsync();
+
+        }
     }
 
      
