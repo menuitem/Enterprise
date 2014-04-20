@@ -163,6 +163,8 @@
     <Compile Include="Controllers\AdminConfigController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ReservationCustomersController.cs" />
+    <Compile Include="Controllers\RestaurantBookingController.cs" />
+    <Compile Include="Controllers\RestaurantCustomerController.cs" />
     <Compile Include="Controllers\RoomBookingsController.cs" />
     <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Global.asax.cs">
@@ -295,6 +297,16 @@
     <Content Include="Views\RoomBookings\AddExtraRoom.cshtml" />
     <Content Include="Views\RoomBookings\Availability.cshtml" />
     <Content Include="Views\RoomBookings\AvailabilityExtraRoom.cshtml" />
+    <Content Include="Views\RestaurantBooking\Create.cshtml" />
+    <Content Include="Views\RestaurantBooking\Delete.cshtml" />
+    <Content Include="Views\RestaurantBooking\Details.cshtml" />
+    <Content Include="Views\RestaurantBooking\Edit.cshtml" />
+    <Content Include="Views\RestaurantBooking\Index.cshtml" />
+    <Content Include="Views\RestaurantCustomer\Create.cshtml" />
+    <Content Include="Views\RestaurantCustomer\Delete.cshtml" />
+    <Content Include="Views\RestaurantCustomer\Details.cshtml" />
+    <Content Include="Views\RestaurantCustomer\Edit.cshtml" />
+    <Content Include="Views\RestaurantCustomer\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
