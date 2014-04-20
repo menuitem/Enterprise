@@ -155,13 +155,17 @@ namespace HotelWizard.Controllers
         public async Task<ActionResult> Availability(DateTime checkin, DateTime checkout)
         {
             //validate dates are not in the past, and checkout is not before checkin
-
+            if (!RoomBooking.validateDates(checkin, checkout))
+            {
+                ViewBag.errorMsg = "Dates are before today, or checkout is before checkin";
+                return View("../ReservationCustomers/Index");
+            }
             //call a method to get a list of available rooms
             SelectList freeRooms = Room.getFreeRooms(checkin, checkout);
             if (freeRooms == null)
             {
                 ViewBag.errorMsg = "No Available Rooms. Please try again";
-                return View("Index");
+                return View("../ReservationCustomers/Index");
             }
 
             //add the select list of available rooms and dates to the ViewBag
@@ -182,14 +186,21 @@ namespace HotelWizard.Controllers
         // POST: /RoomBookings/AvailabilityExtraRoom
         public async Task<ActionResult> AvailabilityExtraRoom(DateTime checkin, DateTime checkout, int customerID)
         {
-            System.Diagnostics.Debug.WriteLine("here....");
-            System.Diagnostics.Debug.WriteLine(customerID);
+            //validate dates are not in the past, and checkout is not before checkin
+            if (!RoomBooking.validateDates(checkin, checkout))
+            {
+                ViewBag.errorMsg = "Dates are before today, or checkout is before checkin";
+                ViewBag.customerID = customerID;
+                return View("AddExtraRoom");
+            }
+
             //call a method to get a list of available rooms
             SelectList freeRooms = Room.getFreeRooms(checkin, checkout);
             if (freeRooms == null)
             {
                 ViewBag.errorMsg = "No Available Rooms. Please try again";
-                return View("Index");
+                ViewBag.customerID = customerID;
+                return View("AddExtraRoom");
             }
 
             //add the select list of available rooms and dates to the ViewBag

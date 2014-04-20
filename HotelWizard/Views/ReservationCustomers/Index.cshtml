@@ -3,10 +3,10 @@
 @{
     ViewBag.Title = "Reservations Home";
 }
-
-<h2>Welcome to Accommodation Reservations Sections</h2>
-
+<img class="small-logo" src="/Images/logo.jpg" />
+<hr/>
 <h3>Search By Customer Name</h3>
+<h3 style="color:red">@ViewBag.errorNoName</h3>
 <form name="input" action="/ReservationCustomers/Results" method="post">
     <div class="form-horizontal">
         <div class="form-group">
@@ -24,6 +24,7 @@
 </form>
 
 <h3>Search By Booking Reference</h3>
+<h3 style="color:red">@ViewBag.errorNoBookingRef</h3>
 <form name="input" action="/ReservationCustomers/ResultsByRef" method="post">
     <div class="form-horizontal">
         <div class="form-group">
@@ -41,6 +42,7 @@
 </form>  
 
 <h3>Check Availability and Create New Reservation</h3>
+<h3 style="color:red">@ViewBag.errorMsg</h3>
 @using (Html.BeginForm("Availability", "RoomBookings", FormMethod.Post, null))
 {
     @Html.AntiForgeryToken()

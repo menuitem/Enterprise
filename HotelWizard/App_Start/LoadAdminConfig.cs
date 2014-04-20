@@ -19,11 +19,10 @@ namespace HotelWizard.App_Start
             try
             {
                 AdminConfig adminconfig = AdminConfig.getDetails();
-                System.Diagnostics.Debug.WriteLine("inside try............");
             }
             catch (Exception)
             {
-                System.Diagnostics.Debug.WriteLine("inside catch............");
+
                 //no data exists, so create single entry
                 AdminConfig.createInitialEntry("sample name", "sample address", 1, 1);
             }

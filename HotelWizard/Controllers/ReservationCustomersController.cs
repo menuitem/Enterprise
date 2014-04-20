@@ -147,15 +147,16 @@ namespace HotelWizard.Controllers
         {
             if (name == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                ViewBag.errorNoName = "Sorry, no customers with that name!";
+                return View("Index");
             }
 
             //call method to search for list of customers by customer name
             List<RoomCustomer> customers = RoomCustomer.findByName(name);
 
-            if (customers == null)
             {
-                return HttpNotFound();
+                ViewBag.errorNoName = "Sorry, no customers with that name!";
+                return View("Index");
             }
 
             //calculate the bookings costs for each booking
@@ -178,8 +179,9 @@ namespace HotelWizard.Controllers
             //search for booking and customer by booking id
             RoomBooking roombooking = await db.RoomBookings.FindAsync(roombookingId);
             if (roombooking == null)
-            {
-                return HttpNotFound();
+            {         
+                ViewBag.errorNoBookingRef = "Sorry, no bookings with that reference!";
+                return View("Index");               
             }
 
             //redirect to details page for the customer id

@@ -23,6 +23,7 @@ namespace HotelWizard.Models
         {
             get
             {
+                //only call the constructor if the instance is null
                 if(configInstance==null)
                 {
                     configInstance = new ConfigSingleton();

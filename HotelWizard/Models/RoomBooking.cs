@@ -49,6 +49,20 @@ namespace HotelWizard.Models
             this.costs = new RoomCosts(rate, numNights.Days, this.isDepositPaid);
         }
 
-        
+        public static Boolean validateDates(DateTime checkin, DateTime checkout)
+        {
+            //verify neither checkin or checkout are before today's date
+            if ((DateTime.Compare(checkin, System.DateTime.Now) < 0) || (DateTime.Compare(checkout, System.DateTime.Now) < 0))
+            {
+                return false;
+            }
+            
+            //verify that checkout is at least 1 day later than checkin
+            if ((checkout - checkin).Days < 1)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }

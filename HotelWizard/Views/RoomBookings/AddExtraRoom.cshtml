@@ -7,8 +7,7 @@
 
 <h2>Please Check Availability</h2>
 
-
-<h3>@customerID</h3>
+<h3 style="color:red">@ViewBag.errorMsg</h3>
 @using (Html.BeginForm("AvailabilityExtraRoom", "RoomBookings", FormMethod.Post, null))
 {
     @Html.AntiForgeryToken()
@@ -34,6 +33,7 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Check Availability" class="btn btn-default" />
+                @Html.ActionLink("Cancel", "Details", "ReservationCustomers", new { id = customerID }, new { @class = "btn btn-default" })
             </div>
         </div>
     </div>
