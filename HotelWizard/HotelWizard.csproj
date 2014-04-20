@@ -204,11 +204,17 @@
     <Compile Include="Migrations\201404201157203_add_checkout_column.Designer.cs">
       <DependentUpon>201404201157203_add_checkout_column.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201404201946069_adding_tables_for_restaurant.cs" />
+    <Compile Include="Migrations\201404201946069_adding_tables_for_restaurant.Designer.cs">
+      <DependentUpon>201404201946069_adding_tables_for_restaurant.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminConfig.cs" />
     <Compile Include="App_Start\ConfigSingleton.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\RestaurantBooking.cs" />
+    <Compile Include="Models\RestaurantCustomer.cs" />
     <Compile Include="Models\Room.cs" />
     <Compile Include="Models\RoomCustomer.cs" />
     <Compile Include="Models\RoomBooking.cs" />
@@ -327,6 +333,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201404201157203_add_checkout_column.resx">
       <DependentUpon>201404201157203_add_checkout_column.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201404201946069_adding_tables_for_restaurant.resx">
+      <DependentUpon>201404201946069_adding_tables_for_restaurant.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
