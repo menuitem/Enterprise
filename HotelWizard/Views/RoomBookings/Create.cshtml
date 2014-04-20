@@ -3,42 +3,45 @@
 @{
     ViewBag.Title = "Create";
     var custid = (String) ViewBag.customerID.ToString();
+    DateTime checkin = (DateTime)(Session["checkin"]);
+    DateTime checkout = (DateTime)(Session["checkout"]);
+    int roomNum = (int)(Session["roomNum"]);
 }
 
 <h2>Create</h2>
+<table class="table">
+    <tr>
+        <th>Check-in Date</th>
+        <th>Check-out Date</th>
+        <th>Room Number</th>
+    </tr>
+    <tr>
+        <td>
+            @checkin
+        </td>
+        <td>
+            @checkout
+        </td>
+        <td>
+            @roomNum
+        </td>
+    </tr>
+</table>
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h3>Room Reservation Details For:</h3>
-        <h3>@custid</h3>
+        <h3>Create Room Reservation Details</h3>
         <hr />
         
-        @Html.ValidationSummary(true)
-        @Html.TextBox("customerID", custid)
+        @Html.ValidationSummary(true)    
         @Html.Hidden("customerID", custid)
-
-
+        @Html.Hidden("checkin", checkin)
+        @Html.Hidden("checkout", checkout)
+        @Html.Hidden("roomID", roomNum)
         
-     
-           
-        <div class="form-group">
-            @Html.LabelFor(model => model.checkin, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.checkin)
-                @Html.ValidationMessageFor(model => model.checkin)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.checkout, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.checkout)
-                @Html.ValidationMessageFor(model => model.checkout)
-            </div>
-        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.specialRate, new { @class = "control-label col-md-2" })
@@ -48,13 +51,6 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.room.RoomId, "room number", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("roomID", String.Empty)
-            </div>
-        </div>
-       
         <div class="form-group">
             @Html.LabelFor(model => model.numPeople, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -79,7 +75,13 @@
             </div>
         </div>
 
-        
+        <div class="form-group">
+            @Html.LabelFor(model => model.isCheckedOut, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.isCheckedOut)
+                @Html.ValidationMessageFor(model => model.isCheckedOut)
+            </div>
+        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

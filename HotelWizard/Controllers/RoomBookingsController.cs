@@ -40,35 +40,19 @@ namespace HotelWizard.Controllers
             return View(roombooking);
         }
 
-        public ActionResult CheckAvailability(int? id){
+        //public ActionResult CheckAvailability(int? id){
 
 
-            return RedirectToAction("Details", "ReservationCustomers", new { id = id });
-        }
+        //    return RedirectToAction("Details", "ReservationCustomers", new { id = id });
+        //}
 
         // GET: /RoomBookings/Create
         public ActionResult Create(int? id)
         {
-            //string query = "SELECT * FROM Rooms";
-            //System.Data.Entity.Infrastructure.DbRawSqlQuery<Room> data = db.Rooms.SqlQuery(query);
-            //List<int> mylist = new List<int>();
-
-            //foreach (Room e in data.ToList())
-            //{
-            //    mylist.Add(e.RoomId);
-            //}     
-
-            //DateTime start = new DateTime(2014, 04, 19);
-            //DateTime end = new DateTime(2014, 04, 21);
-            //SelectList test = Room.getFreeRooms(start, end);
-            //System.Diagnostics.Debug.WriteLine(test.DataTextField);
-
-
             //ViewBag.roomID = Room.getFreeRooms();
-            //ViewBag.roomID = Room.getEmptyRooms();
+            //ViewBag.roomID = Room.getAllRooms();
             ViewBag.customerID = id;
-            //System.Diagnostics.Debug.WriteLine("here...................");
-    
+     
             return View();
         }
 
@@ -77,7 +61,7 @@ namespace HotelWizard.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include="RoomBookingId,checkin,checkout,specialRate,RoomId,numPeople,isDepositPaid,isCheckedIn,customerID")] RoomBooking roombooking)
+        public async Task<ActionResult> Create([Bind(Include="RoomBookingId,checkin,checkout,specialRate,RoomId,numPeople,isDepositPaid,isCheckedIn,isCheckedOut,customerID")] RoomBooking roombooking)
         {
             
             if (ModelState.IsValid)
@@ -97,8 +81,7 @@ namespace HotelWizard.Controllers
                 mylist.Add(e.RoomId);
             }
 
-            ViewBag.roomID = new SelectList(mylist);
-            
+            ViewBag.roomID = new SelectList(mylist);   
             ViewBag.customerID = roombooking.customerID;
             
             return View(roombooking);
@@ -127,7 +110,7 @@ namespace HotelWizard.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "RoomBookingId,checkin,checkout,specialRate,numPeople,isDepositPaid,isCheckedIn,customerID")] RoomBooking roombooking)
+        public async Task<ActionResult> Edit([Bind(Include = "RoomBookingId,roomID,checkin,checkout,specialRate,numPeople,isDepositPaid,isCheckedIn,isCheckedOut,customerID")] RoomBooking roombooking)
         {
             
             if (ModelState.IsValid)
@@ -166,6 +149,72 @@ namespace HotelWizard.Controllers
             db.RoomBookings.Remove(roombooking);
             await db.SaveChangesAsync();
             return RedirectToAction("Details", "ReservationCustomers", new { id = roombooking.customerID });
+        }
+
+        // POST: /RoomBookings/Availability
+        public async Task<ActionResult> Availability(DateTime checkin, DateTime checkout)
+        {
+            //validate dates are not in the past, and checkout is not before checkin
+
+            //call a method to get a list of available rooms
+            SelectList freeRooms = Room.getFreeRooms(checkin, checkout);
+            if (freeRooms == null)
+            {
+                ViewBag.errorMsg = "No Available Rooms. Please try again";
+                return View("Index");
+            }
+
+            //add the select list of available rooms and dates to the ViewBag
+            ViewBag.checkin = checkin;
+            ViewBag.checkout = checkout;
+            ViewBag.roomID = freeRooms;
+            return View();
+        }
+
+        //Add and extra room booking to existing customer
+        public async Task<ActionResult> AddExtraRoom(int? customerID)
+        {
+            ViewBag.customerID = customerID;
+            System.Diagnostics.Debug.WriteLine(customerID);
+            return View();
+        }
+
+        // POST: /RoomBookings/AvailabilityExtraRoom
+        public async Task<ActionResult> AvailabilityExtraRoom(DateTime checkin, DateTime checkout, int customerID)
+        {
+            System.Diagnostics.Debug.WriteLine("here....");
+            System.Diagnostics.Debug.WriteLine(customerID);
+            //call a method to get a list of available rooms
+            SelectList freeRooms = Room.getFreeRooms(checkin, checkout);
+            if (freeRooms == null)
+            {
+                ViewBag.errorMsg = "No Available Rooms. Please try again";
+                return View("Index");
+            }
+
+            //add the select list of available rooms and dates to the ViewBag
+            ViewBag.checkin = checkin;
+            ViewBag.checkout = checkout;
+            ViewBag.roomID = freeRooms;
+            ViewBag.customerID = customerID;
+
+            return View();
+        
+        }
+
+        public async Task<ActionResult> CreateExtra(DateTime checkin, DateTime checkout, int roomId, int customerID)
+        {
+            //add selected dates and room number to the session, so they can 
+            //be accessed later during the creation of the reservation.
+            //This is because creating a reservation also means creating a 
+            //customer, and this is done over more than one view/screen.
+            //Therefore storing them in the session means they can be accessed by both views.
+            Session.Add("checkin", checkin);
+            Session.Add("checkout", checkout);
+            Session.Add("roomNum", roomId);
+
+            return RedirectToAction("Create", "RoomBookings", new { id = customerID });
+            //return RedirectToAction("Create", "RoomBookings", customerID);
         }
 
         protected override void Dispose(bool disposing)

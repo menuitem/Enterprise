@@ -7,7 +7,7 @@
 
 <div>
     <hr />
-               
+    <h4>Customer Details:</h4>         
     <table class="table">
         <tr>
             <th>Second Name</th>
@@ -40,7 +40,8 @@
 
             </td>
             <td>
-                @Html.ActionLink("Edit Customer Details", "Edit", new { id = Model.ID }) |
+                @Html.ActionLink("Edit Customer Details", "Edit", new { id = Model.ID }) |               
+                @Html.ActionLink("Create new booking", "AddExtraRoom", "RoomBookings", new { customerID = Model.ID }, null) |               
                 @Html.ActionLink("Delete Customer", "Delete", new { id = Model.ID })
             </td>
         </tr>
@@ -48,9 +49,9 @@
 
     @if (Model.Bookings.Count == 0) { 
         <h2>No Bookings yet for this Customer</h2>
-        @Html.ActionLink("Create new booking", "Create","RoomBookings", new { id = Model.ID }, null)
     }
     else { 
+    <h4>Booking Summary:</h4>
     <table class="table">
         <tr>
             <th>Check-in Date</th>

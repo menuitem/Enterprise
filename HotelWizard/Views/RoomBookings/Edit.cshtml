@@ -3,102 +3,94 @@
     ViewBag.Title = "Edit";
 }
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+<h3>Room Reservation Details For:</h3>
+<h3>@Html.DisplayTextFor(model => model.customer.name)</h3>
 
-    <div class="form-horizontal">
-        <h3>Room Reservation Details For:</h3>
-        <h3>@Html.DisplayTextFor(model => model.customer.name)</h3>
-        <hr />
-        @Html.ValidationSummary(true)
-        @Html.HiddenFor(model => model.RoomBookingId)
-    
-        @Html.HiddenFor(model => model.customerID)
-        <div class="form-group">
-            @Html.LabelFor(model => model.checkin, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.checkin)
-                @Html.ValidationMessageFor(model => model.checkin)
+<table class="table">
+    <tr>
+        <th>Check-in Date</th>
+        <th>Check-out Date</th>
+        <th>Room Number</th>
+        <th>Room Type</th>
+        <th>Standard room Rate</th>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(model => model.checkin)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.checkout)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.room.roomNum)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.room.roomType)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.room.roomRate)
+        </td>
+    </tr>
+</table>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <hr />
+                <!--Only status attributes are editable, the rest are hidden-->
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(model => model.RoomBookingId)
+                @Html.HiddenFor(model => model.customerID)
+                @Html.HiddenFor(model => model.roomID)
+                @Html.HiddenFor(model => model.checkin)
+                @Html.HiddenFor(model => model.checkout)
+                @Html.HiddenFor(model => model.numPeople)
+                @Html.HiddenFor(model => model.specialRate)
+                
+                <div class="form-group">
+                    @Html.Label("Confirmed and Deposit Paid", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.isDepositPaid)
+                        @Html.ValidationMessageFor(model => model.isDepositPaid)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Checked In", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.isCheckedIn)
+                        @Html.ValidationMessageFor(model => model.isCheckedIn)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Checked Out", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.isCheckedOut)
+                        @Html.ValidationMessageFor(model => model.isCheckedOut)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                        <input type="button" value="Cancel" class="btn btn-default" onclick="goBack()" />
+                    </div>
+                </div>
             </div>
+        }
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.checkout, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.checkout)
-                @Html.ValidationMessageFor(model => model.checkout)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.specialRate, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.specialRate)
-                @Html.ValidationMessageFor(model => model.specialRate)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.room.roomRate, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.room.roomRate)
-                @Html.ValidationMessageFor(model => model.room.roomRate)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.room.roomType, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.room.roomType)
-                @Html.ValidationMessageFor(model => model.room.roomType)
-            </div>
-        </div>
-
- 
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.numPeople, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.numPeople)
-                @Html.ValidationMessageFor(model => model.numPeople)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.isDepositPaid, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.isDepositPaid)
-                @Html.ValidationMessageFor(model => model.isDepositPaid)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.isCheckedIn, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.isCheckedIn)
-                @Html.ValidationMessageFor(model => model.isCheckedIn)
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-                <input type="button" value="Cancel" class="btn btn-default" onclick="goBack()" />
-            </div>
-        </div>
-    </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
-<script>
-    function goBack() {
-        window.history.back()
-    }
-</script>
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }
+        <script>
+            function goBack() {
+                window.history.back()
+            }
+        </script>

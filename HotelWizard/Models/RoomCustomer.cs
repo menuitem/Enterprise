@@ -15,5 +15,14 @@ namespace HotelWizard.Models
         public String address { get; set; }
         public String nationality { get; set; }
         public virtual ICollection<RoomBooking> Bookings { get; set; }
+
+        //method to find customers by customer name
+        public static List<RoomCustomer> findByName(String name){
+            ApplicationDbContext db = new ApplicationDbContext();
+            string query = "SELECT * FROM RoomCustomers WHERE name = @p0";
+            System.Data.Entity.Infrastructure.DbRawSqlQuery<RoomCustomer> data = db.RoomCustomers.SqlQuery(query, name);
+            List<RoomCustomer> customers = data.ToList();
+            return customers;
+        }
     }
 }

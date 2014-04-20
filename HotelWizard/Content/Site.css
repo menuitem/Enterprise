@@ -64,3 +64,19 @@ input[type="checkbox"].input-validation-error {
     height: 50px;
     float: left;
 }
+
+.details {
+    float:left;
+    width:380px;
+}
+
+
+.details dt {
+    float: left;
+    width: 230px;
+}
+
+#links{
+    clear:left;
+}
+

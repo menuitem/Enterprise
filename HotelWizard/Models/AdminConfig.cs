@@ -17,17 +17,20 @@ namespace HotelWizard.Models
         public static AdminConfig getDetails()
         {
             ApplicationDbContext db = new ApplicationDbContext();
+            AdminConfig adminconfig = null;
             //there should only be one row for this table
             try
             {
-                AdminConfig adminconfig = db.AdminConfig.Find(1);
-                return adminconfig;
+                adminconfig = db.AdminConfig.First();
+                System.Diagnostics.Debug.WriteLine("empty details .........");
+                System.Diagnostics.Debug.WriteLine(adminconfig.HotelName);
             }
             catch (Exception)
             {   
                 //throw an exception if the tablle has no entry
-                throw;
+                throw new System.Exception();
             }
+            return adminconfig;
                        
         }
 
@@ -35,12 +38,14 @@ namespace HotelWizard.Models
         {
             ApplicationDbContext db = new ApplicationDbContext();
             AdminConfig initial = new AdminConfig();
+            initial.AdminConfigId = 1;
             initial.HotelName = hotelName;
             initial.HotelAddress = hotelAddress;
             initial.NumOfRooms = numRooms;
             initial.NumOfTables = numTables;
-            System.Diagnostics.Debug.WriteLine("here............");
-            db.SaveChangesAsync();
+             
+            db.AdminConfig.Add(initial);           
+            db.SaveChanges();
 
         }
     }

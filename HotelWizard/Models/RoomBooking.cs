@@ -20,6 +20,7 @@ namespace HotelWizard.Models
         public int numPeople { get; set; }
         public Boolean isDepositPaid { get; set; }
         public Boolean isCheckedIn { get; set; }
+        public Boolean isCheckedOut { get; set; }
         public int customerID { get; set; }
         public virtual RoomCustomer customer { get; set; }
         public int roomID { get; set; }
@@ -47,5 +48,7 @@ namespace HotelWizard.Models
             System.TimeSpan numNights = this.checkout - this.checkin;
             this.costs = new RoomCosts(rate, numNights.Days, this.isDepositPaid);
         }
+
+        
     }
 }

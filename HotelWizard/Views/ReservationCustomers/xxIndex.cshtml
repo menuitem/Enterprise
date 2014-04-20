@@ -1,17 +1,18 @@
 ﻿@model IEnumerable<HotelWizard.Models.RoomCustomer>
-
 @{
-    ViewBag.Title = "Results";
+    ViewBag.Title = "List of Customers and Accommodation Bookings";
 }
 
-<h2>Results for Reservations Search with Surname: @ViewBag.surname</h2>
+<h2>List of Customers and Accommodation Bookings</h2>
 
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
 
 @foreach (var customer in Model)
 {
     <table class="table">
         <tr>
-            <th>Customer Details:</th>
             <th>
                 @Html.DisplayNameFor(model => model.name)
             </th>
@@ -33,7 +34,6 @@
             <th></th>
         </tr>
         <tr>
-            <td></td>
             <td>
                 @Html.DisplayFor(modelItem => customer.name)
             </td>
@@ -53,27 +53,20 @@
                 @Html.DisplayFor(modelItem => customer.nationality)
             </td>
             <td>
-                @Html.ActionLink("Select This Customer", "Details", new { id = customer.ID })
-                <!--
                 @Html.ActionLink("Edit Customer Details", "Edit", new { id = customer.ID }) |
-                @Html.ActionLink("Create new booking", "AddExtraRoom", "RoomBookings", new { customerID = customer.ID }, null) |
                 @Html.ActionLink("Delete Customer", "Delete", new { id = customer.ID })
-                -->
             </td>
         </tr>
         @if (customer.Bookings.Count == 0)
         {
             <tr>
                 <td>No Bookings for this customer!</td>
-                <!--
                 <td>@Html.ActionLink("Create new booking", "Create", "RoomBookings", new { id = customer.ID }, null)</td>
-                -->
             </tr>
         }
         @foreach (var item in customer.Bookings)
         {
             <tr>
-                <th>Booking Summary:</th>
                 <th>
                     Check in
                 </th>
@@ -92,7 +85,6 @@
             </tr>
 
             <tr>
-                <td></td>
                 <td>
                     @Html.DisplayFor(modelItem => item.checkin)
                 </td>
@@ -107,11 +99,16 @@
                 </td>
                 <td></td>
                 <td></td>
-                
+                <td>
+                    @Html.ActionLink("View Booking Details", "Details", "RoomBookings",
+                            new { id = item.RoomBookingId }, null) |
+                    @Html.ActionLink("Create new booking", "Create", "RoomBookings", new { id = customer.ID }, null) |
+                    @Html.ActionLink("Delete Booking", "Delete", "RoomBookings", new { id = item.RoomBookingId }, null)
+                </td>
+                <!--create a new room booking for a given customer-->
+                <!--@Html.ActionLink("Create new booking", "Create","RoomBookings", new { id = customer.ID }, null)-->
             </tr>
         }
     </table>
     <hr id="thick" />
 }
-
-

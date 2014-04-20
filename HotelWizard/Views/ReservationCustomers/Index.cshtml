@@ -1,114 +1,78 @@
-﻿@model IEnumerable<HotelWizard.Models.RoomCustomer>
+﻿@model HotelWizard.Models.RoomBooking
+
 @{
-    ViewBag.Title = "List of Customers and Accommodation Bookings";
+    ViewBag.Title = "Reservations Home";
 }
 
-<h2>List of Customers and Accommodation Bookings</h2>
+<h2>Welcome to Accommodation Reservations Sections</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<h3>Search By Customer Name</h3>
+<form name="input" action="/ReservationCustomers/Results" method="post">
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-md-2">Customer Surname:</label>
+            <div class="col-md-10">
+                <input class="text-box single-line" id="name" name="name" type="text" value="">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Search" class="btn btn-default">
+            </div>
+        </div>
+    </div>
+</form>
 
-@foreach (var customer in Model)
+<h3>Search By Booking Reference</h3>
+<form name="input" action="/ReservationCustomers/ResultsByRef" method="post">
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-md-2">Booking Reference:</label>
+            <div class="col-md-10">
+                <input class="text-box single-line" id="id" name="id" type="text" value="">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Search" class="btn btn-default">
+            </div>
+        </div>
+    </div>
+</form>  
+
+<h3>Check Availability and Create New Reservation</h3>
+@using (Html.BeginForm("Availability", "RoomBookings", FormMethod.Post, null))
 {
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.firstname)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.phone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.address)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.nationality)
-            </th>
-            <th></th>
-        </tr>
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => customer.name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => customer.firstname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => customer.email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => customer.phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => customer.address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => customer.nationality)
-            </td>
-            <td>
-                @Html.ActionLink("Edit Customer Details", "Edit", new { id = customer.ID }) |
-                @Html.ActionLink("Delete Customer", "Delete", new { id = customer.ID })
-            </td>
-        </tr>
-        @if (customer.Bookings.Count == 0)
-        {
-            <tr>
-                <td>No Bookings for this customer!</td>
-                <td>@Html.ActionLink("Create new booking", "Create", "RoomBookings", new { id = customer.ID }, null)</td>
-            </tr>
-        }
-        @foreach (var item in customer.Bookings)
-        {
-            <tr>
-                <th>
-                    Check in
-                </th>
-                <th>
-                    Check out
-                </th>
-                <th>
-                    No. People
-                </th>
-                <th>
-                    Room Type
-                </th>
-                <th></th>
-                <th></th>
-                <th></th>
-            </tr>
-
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.checkin)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.checkout)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.numPeople)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.room.roomType)
-                </td>
-                <td></td>
-                <td></td>
-                <td>
-                    @Html.ActionLink("View Booking Details", "Details", "RoomBookings",
-                            new { id = item.RoomBookingId }, null) |
-                    @Html.ActionLink("Create new booking", "Create", "RoomBookings", new { id = customer.ID }, null) |
-                    @Html.ActionLink("Delete Booking", "Delete", "RoomBookings", new { id = item.RoomBookingId }, null)
-                </td>
-                <!--create a new room booking for a given customer-->
-                <!--@Html.ActionLink("Create new booking", "Create","RoomBookings", new { id = customer.ID }, null)-->
-            </tr>
-        }
-    </table>
-    <hr id="thick" />
+    @Html.AntiForgeryToken()
+   
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true)
+ 
+        <div class="form-group">
+            @Html.Label("Check In Date:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.checkin)
+                @Html.ValidationMessageFor(model => model.checkin)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Check Out Date:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.checkout)
+                @Html.ValidationMessageFor(model => model.checkout)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Check Availability" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
 }
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+
+
+

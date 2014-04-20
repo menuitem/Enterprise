@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using HotelWizard.Models;
+using System.Web.SessionState;
 
 namespace HotelWizard.Controllers
 {
@@ -18,7 +19,8 @@ namespace HotelWizard.Controllers
         // GET: /ReservationCustomers/
         public async Task<ActionResult> Index()
         {
-            return View(await db.RoomCustomers.ToListAsync());
+            //return View(await db.RoomCustomers.ToListAsync());
+            return View();
         }
 
         // GET: /ReservationCustomers/Details/5
@@ -41,8 +43,13 @@ namespace HotelWizard.Controllers
         }
 
         // GET: /ReservationCustomers/Create
-        public ActionResult Create()
+        public ActionResult Create()//DateTime checkin, DateTime checkout, int roomId)
         {
+            //Session.Add("checkin", checkin);
+            //Session.Add("checkout", checkout);
+            //Session.Add("roomNum", roomId);
+
+            System.Diagnostics.Debug.WriteLine("....here....");
             return View();
         }
 
@@ -57,7 +64,8 @@ namespace HotelWizard.Controllers
             {
                 db.RoomCustomers.Add(roomcustomer);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Details/"+roomcustomer.ID);
+                //return RedirectToAction("Details/"+roomcustomer.ID);
+                return RedirectToAction("Create/"+roomcustomer.ID, "RoomBookings");
             }
 
             return View(roomcustomer);
@@ -120,8 +128,15 @@ namespace HotelWizard.Controllers
             return RedirectToAction("Index");
         }
 
+        //// GET: /ReservationCustomer/Index
+        //public async Task<ActionResult> Index()
+        //{
+
+        //    return View();
+        //}
+
         // GET: /Customer/Search
-        public async Task<ActionResult> Search()
+        public async Task<ActionResult> SearchByRef()
         {
 
             return View();
@@ -134,16 +149,16 @@ namespace HotelWizard.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            //Customer customer = await db.Customers.FindAsync(id);
-            string query = "SELECT * FROM RoomCustomers WHERE name = @p0";
-            System.Data.Entity.Infrastructure.DbRawSqlQuery<RoomCustomer> data = db.RoomCustomers.SqlQuery(query, name);
-            List<RoomCustomer> customers = data.ToList();
+
+            //call method to search for list of customers by customer name
+            List<RoomCustomer> customers = RoomCustomer.findByName(name);
 
             if (customers == null)
             {
                 return HttpNotFound();
             }
 
+            //calculate the bookings costs for each booking
             foreach (var cust in customers)
             {
                 foreach (var booking in cust.Bookings)
@@ -151,8 +166,38 @@ namespace HotelWizard.Controllers
                     booking.getCosts();
                 }
             }
+            ViewBag.surname = name;
+            return View("Results", customers);
+        }
 
-            return View(customers);
+        // GET: /ReservationCustomer/Index
+        public async Task<ActionResult> ResultsByRef(string id)
+        {
+            int roombookingId = Convert.ToInt32(id);
+       
+            //search for booking and customer by booking id
+            RoomBooking roombooking = await db.RoomBookings.FindAsync(roombookingId);
+            if (roombooking == null)
+            {
+                return HttpNotFound();
+            }
+
+            //redirect to details page for the customer id
+            return RedirectToAction("Details/" + roombooking.customerID);
+        }
+
+        public async Task<ActionResult> CreateNew(DateTime checkin, DateTime checkout, int roomId)
+        {
+            //add selected dates and room number to the session, so they can 
+            //be accessed later during the creation of the reservation.
+            //This is because creating a reservation also means creating a 
+            //customer, and this is done over more than one view/screen.
+            //Therefore storing them in the session means they can be accessed by both views.
+            Session.Add("checkin", checkin);
+            Session.Add("checkout", checkout);
+            Session.Add("roomNum", roomId);
+
+            return Redirect("/ReservationCustomers/Create");
         }
 
         protected override void Dispose(bool disposing)

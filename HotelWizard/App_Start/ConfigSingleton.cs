@@ -13,6 +13,7 @@ namespace HotelWizard.Models
         public string hotelAddress;
 
         private static ConfigSingleton configInstance;
+        //constructor is private
         private ConfigSingleton() 
         {
             getDetails();
@@ -50,8 +51,17 @@ namespace HotelWizard.Models
         }
 
         public void getDetails(){
+            AdminConfig adminconfig = null;
             //initialize the attributes by retrieveing data from the database
-            AdminConfig adminconfig = AdminConfig.getDetails();
+            try
+            {
+                adminconfig = AdminConfig.getDetails();
+            }
+            catch (Exception)
+            {
+                //there has been a problem 
+            }
+            
             if (adminconfig != null)
             {
                 this.numRooms = adminconfig.NumOfRooms;
@@ -59,8 +69,6 @@ namespace HotelWizard.Models
                 this.hotelName = adminconfig.HotelName;
                 this.hotelAddress = adminconfig.HotelAddress;
             }
-        }
-
-        
+        }        
     }
 }

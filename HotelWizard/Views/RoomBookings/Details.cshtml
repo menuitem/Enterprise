@@ -3,12 +3,14 @@
     ViewBag.Title = "Details";
 }
 
-<div>
-    <h3>Room Reservation Details For:</h3>
-    <h3>@Html.DisplayTextFor(model => model.customer.firstname) @Html.DisplayTextFor(model => model.customer.name)</h3>
-    <hr />
 
-    <dl class="dl-horizontal">
+    <h3>Room Reservation Details For: @Model.customer.firstname @Model.customer.name</h3>
+    <h3></h3>
+    <hr />
+<div class="details">
+    <h4>Room Details:</h4>
+    <dl>
+        <!--
         <dt>
             @Html.DisplayNameFor(model => model.customer.name)
         </dt>
@@ -16,9 +18,9 @@
         <dd>
             @Html.DisplayFor(model => model.customer.name)
         </dd>
-
+        -->
         <dt>
-            @Html.DisplayNameFor(model => model.checkin)
+            @Html.DisplayName("Check In")
         </dt>
 
         <dd>
@@ -26,7 +28,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.checkout)
+            @Html.DisplayName("Check Out")
         </dt>
 
         <dd>
@@ -34,23 +36,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.specialRate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.specialRate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.room.roomRate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.room.roomRate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.room.roomType)
+            @Html.DisplayName("Room Type")
         </dt>
 
         <dd>
@@ -58,7 +44,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.room.roomNum)
+            @Html.DisplayName("Room Number")
         </dt>
 
         <dd>
@@ -66,15 +52,68 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.numPeople)
+            @Html.DisplayName("Number of People")
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.numPeople)
         </dd>
+    </dl>
+</div>
+<div class="details">
+    <h4>Costs:</h4>
+    <dl>
+        <dt>
+            @Html.DisplayName("Standard Room Rate")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.room.roomRate)
+        </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.isDepositPaid)
+            @Html.DisplayName("Discounted Rate")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.specialRate)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Total Cost of Booking")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.costs.totalCost)
+        </dd>
+        <dt>
+            @Html.DisplayName("Deposit Due")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.costs.depositDue)
+        </dd>
+        <dt>
+            @Html.DisplayName("Amount of Deposit Paid")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.costs.depositPaid)
+        </dd>
+        <dt>
+            @Html.DisplayName("Balance left to pay")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.costs.balanceDue)
+        </dd>
+        </dl>
+</div>
+<div class="details">
+    <h4>Status:</h4>
+    <dl>
+        <dt>
+            @Html.DisplayName("Confirmed and Deposit Paid?")
         </dt>
 
         <dd>
@@ -82,45 +121,25 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.isCheckedIn)
+            @Html.DisplayName("Checked In?")
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.isCheckedIn)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.costs.totalCost)
+            @Html.DisplayName("Checked Out?")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.costs.totalCost)
+            @Html.DisplayFor(model => model.isCheckedOut)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.costs.depositDue)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.costs.depositDue)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.costs.depositPaid)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.costs.depositPaid)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.costs.balanceDue)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.costs.balanceDue)
-        </dd>
-
     </dl>
+    <p>
+        @Html.ActionLink("Change Status", "Edit", new { id = Model.RoomBookingId }, new { @class = "btn btn-default" })
+    </p>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.RoomBookingId }, new { @class = "btn btn-default" }) |
+<p id="links">    
     @Html.ActionLink("Delete", "Delete", new { id = Model.RoomBookingId }, new { @class = "btn btn-default" }) |
     <input type="submit" value="Back" class="btn btn-default" onclick="goBack()" />
 

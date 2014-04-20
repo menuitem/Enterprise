@@ -200,6 +200,10 @@
     <Compile Include="Migrations\201404152039403_add_roomid_to_roombooking.Designer.cs">
       <DependentUpon>201404152039403_add_roomid_to_roombooking.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201404201157203_add_checkout_column.cs" />
+    <Compile Include="Migrations\201404201157203_add_checkout_column.Designer.cs">
+      <DependentUpon>201404201157203_add_checkout_column.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminConfig.cs" />
@@ -263,13 +267,13 @@
     <Content Include="Views\RoomBookings\Delete.cshtml" />
     <Content Include="Views\RoomBookings\Details.cshtml" />
     <Content Include="Views\RoomBookings\Edit.cshtml" />
-    <Content Include="Views\RoomBookings\Index.cshtml" />
+    <Content Include="Views\RoomBookings\xxIndex.cshtml" />
     <Content Include="Views\ReservationCustomers\Create.cshtml" />
     <Content Include="Views\ReservationCustomers\Delete.cshtml" />
     <Content Include="Views\ReservationCustomers\Details.cshtml" />
     <Content Include="Views\ReservationCustomers\Edit.cshtml" />
+    <Content Include="Views\ReservationCustomers\xxIndex.cshtml" />
     <Content Include="Views\ReservationCustomers\Index.cshtml" />
-    <Content Include="Views\ReservationCustomers\Search.cshtml" />
     <Content Include="Views\ReservationCustomers\Results.cshtml" />
     <Content Include="Views\AdminConfig\Create.cshtml" />
     <Content Include="Views\AdminConfig\xxDelete.cshtml" />
@@ -281,6 +285,10 @@
     <Content Include="Views\Room\Details.cshtml" />
     <Content Include="Views\Room\Edit.cshtml" />
     <Content Include="Views\Room\Index.cshtml" />
+    <Content Include="Views\ReservationCustomers\xxAvailability.cshtml" />
+    <Content Include="Views\RoomBookings\AddExtraRoom.cshtml" />
+    <Content Include="Views\RoomBookings\Availability.cshtml" />
+    <Content Include="Views\RoomBookings\AvailabilityExtraRoom.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -316,6 +324,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201404152039403_add_roomid_to_roombooking.resx">
       <DependentUpon>201404152039403_add_roomid_to_roombooking.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201404201157203_add_checkout_column.resx">
+      <DependentUpon>201404201157203_add_checkout_column.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
