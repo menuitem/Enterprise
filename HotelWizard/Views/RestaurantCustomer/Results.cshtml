@@ -1,12 +1,13 @@
-﻿@model HotelWizard.Models.RestaurantCustomer
+﻿@model IEnumerable<HotelWizard.Models.RestaurantCustomer>
 
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details of Reservations for @Model.FirstName @Model.SecondName</h2>
+<h2>Search Results for Restaurant Bookings</h2>
 <hr />
-<div>
+@foreach (var customer in Model)
+{
     <h4>Customer Details:</h4>
     <table class="table">
         <tr>
@@ -17,26 +18,25 @@
         </tr>
         <tr>
             <td>
-                @Html.DisplayFor(model => model.SecondName)
+                @Html.DisplayFor(model => customer.SecondName)
             </td>
             <td>
-                @Html.DisplayFor(model => model.FirstName)
+                @Html.DisplayFor(model => customer.FirstName)
             </td>
             <td>
-                @Html.DisplayFor(model => model.Email)
+                @Html.DisplayFor(model => customer.Email)
             </td>
             <td>
-                @Html.DisplayFor(model => model.Phone)
+                @Html.DisplayFor(model => customer.Phone)
             </td>
             <td></td>
             <td>
-                @Html.ActionLink("Edit Customer Details", "Edit", new { id = Model.ID }) |
-                @Html.ActionLink("Delete Customer", "Delete", new { id = Model.ID })
+                @Html.ActionLink("Select This Customer", "Details", new { id = customer.ID })
             </td>
         </tr>
     </table>
 
-    @if (Model.Bookings.Count == 0)
+    if (customer.Bookings.Count == 0)
     {
         <h2>No Bookings yet for this Customer</h2>
     }
@@ -50,7 +50,7 @@
                 <th>No. of People</th>
                 <th>Table Number</th>
             </tr>
-            @foreach (var item in Model.Bookings)
+            @foreach (var item in customer.Bookings)
             {
                 <tr>
                     <td>
@@ -66,16 +66,13 @@
                         @Html.DisplayFor(modelItem => item.TableNumber)
                     </td>
 
-                    <td>
-                        @Html.ActionLink("Edit Booking Details", "Edit", "RestaurantBooking",
-                            new { id = item.RestaurantBookingId }, null) |
-                        @Html.ActionLink("Delete Booking", "Delete", "RestaurantBooking", new { id = item.RestaurantBookingId }, null)
-                    </td>
+                    <td></td>
                 </tr>
             }
         </table>
     }
-</div>
+    <hr id="thick" />
+}
 <p>
     @Html.ActionLink("Return to Restaurant Home Page", "Index")
 </p>

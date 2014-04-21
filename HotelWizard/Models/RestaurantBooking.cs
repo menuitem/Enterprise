@@ -31,7 +31,7 @@ namespace HotelWizard.Models
             //the total number of tables is stored as an attribute in the ConfigSingleton class
             int totalNumberOfRooms = ConfigSingleton.Instance.numRooms;
             List<int> mylist = new List<int>();
-            for (int i = 0; i < totalNumberOfRooms; i++)
+            for (int i = 1; i <= totalNumberOfRooms; i++)
             {
                 mylist.Add(i);
             }
@@ -46,5 +46,7 @@ namespace HotelWizard.Models
             return new SelectList(mylist);
 
         }
+
+        
     }
 }

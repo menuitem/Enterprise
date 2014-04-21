@@ -38,9 +38,9 @@ namespace HotelWizard.Controllers
         }
 
         // GET: /RestaurantBooking/Create
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         {
-            ViewBag.customerID = new SelectList(db.RestaurantCustomers, "ID", "FirstName");
+            ViewBag.customerID = id;
             return View();
         }
 
@@ -49,16 +49,15 @@ namespace HotelWizard.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include="RestaurantBookingId,BookingDate,BookingTime,NumOfPeople,customerID")] RestaurantBooking restaurantbooking)
+        public async Task<ActionResult> Create([Bind(Include="RestaurantBookingId,BookingDate,BookingTime,NumOfPeople,customerID,TableNumber")] RestaurantBooking restaurantbooking)
         {
             if (ModelState.IsValid)
             {
                 db.RestaurantBookings.Add(restaurantbooking);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "RestaurantCustomer", new { id = restaurantbooking.customerID });
             }
 
-            ViewBag.customerID = new SelectList(db.RestaurantCustomers, "ID", "FirstName", restaurantbooking.customerID);
             return View(restaurantbooking);
         }
 
@@ -74,7 +73,7 @@ namespace HotelWizard.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.customerID = new SelectList(db.RestaurantCustomers, "ID", "FirstName", restaurantbooking.customerID);
+       
             return View(restaurantbooking);
         }
 
@@ -83,15 +82,15 @@ namespace HotelWizard.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include="RestaurantBookingId,BookingDate,BookingTime,NumOfPeople,customerID")] RestaurantBooking restaurantbooking)
+        public async Task<ActionResult> Edit([Bind(Include="RestaurantBookingId,BookingDate,BookingTime,NumOfPeople,customerID,TableNumber")] RestaurantBooking restaurantbooking)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(restaurantbooking).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "RestaurantCustomer", new { id = restaurantbooking.customerID });
             }
-            ViewBag.customerID = new SelectList(db.RestaurantCustomers, "ID", "FirstName", restaurantbooking.customerID);
+            //ViewBag.customerID = new SelectList(db.RestaurantCustomers, "ID", "FirstName", restaurantbooking.customerID);
             return View(restaurantbooking);
         }
 
@@ -116,9 +115,13 @@ namespace HotelWizard.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             RestaurantBooking restaurantbooking = await db.RestaurantBookings.FindAsync(id);
+            //save customer id before deleting the booking
+            int customerID = restaurantbooking.customerID;
             db.RestaurantBookings.Remove(restaurantbooking);
             await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+
+            return RedirectToAction("Details", "RestaurantCustomer", new { id = customerID });
+            //return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
@@ -133,12 +136,12 @@ namespace HotelWizard.Controllers
         // POST: /RestaurantBookings/Availability
         public async Task<ActionResult> Availability(DateTime BookingDate)
         {
-            //validate dates are not in the past, and checkout is not before checkin
-            //if (!RestaurantBooking.validateDates(BookingDate)
-            //{
-            //    ViewBag.errorMsg = "Dates are before today, or checkout is before checkin";
-            //    return View("../ReservationCustomers/Index");
-            //}
+            //validate query date is not in the past
+            if (!Dates.validateDates(BookingDate))
+            {
+                ViewBag.errorMsg = "Date is before today";
+                return View("../RestaurantCustomer/Index");
+            }
             //call a method to get a list of available rooms
             SelectList freeTables = RestaurantBooking.getFreeTables(BookingDate);
             if (freeTables == null)
@@ -149,8 +152,10 @@ namespace HotelWizard.Controllers
 
             //add the select list of available tables and the date to the ViewBag
             ViewBag.BookingDate = BookingDate;
-            ViewBag.freeTables = freeTables;
+            ViewBag.TableNum = freeTables;
             return View();
         }
+
+        
     }
 }

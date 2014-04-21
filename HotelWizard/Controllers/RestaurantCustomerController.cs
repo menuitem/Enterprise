@@ -36,6 +36,19 @@ namespace HotelWizard.Controllers
             return View(restaurantcustomer);
         }
 
+        public async Task<ActionResult> CreateNew(DateTime BookingDate, int TableNum)
+        {
+            //add selected dates and room number to the session, so they can 
+            //be accessed later during the creation of the reservation.
+            //This is because creating a reservation also means creating a 
+            //customer, and this is done over more than one view/screen.
+            //Therefore storing them in the session means they can be accessed by both views.
+            Session.Add("BookingDate", BookingDate);
+            Session.Add("TableNum", TableNum);
+            
+            return Redirect("/RestaurantCustomer/Create");
+        }
+
         // GET: /RestaurantCustomer/Create
         public ActionResult Create()
         {
@@ -53,7 +66,8 @@ namespace HotelWizard.Controllers
             {
                 db.RestaurantCustomers.Add(restaurantcustomer);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                //redirect to the create restaurant booking form
+                return RedirectToAction("Create/" + restaurantcustomer.ID, "RestaurantBooking");
             }
 
             return View(restaurantcustomer);
@@ -85,7 +99,7 @@ namespace HotelWizard.Controllers
             {
                 db.Entry(restaurantcustomer).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "RestaurantCustomer", new { id = restaurantcustomer.ID });
             }
             return View(restaurantcustomer);
         }
@@ -114,6 +128,45 @@ namespace HotelWizard.Controllers
             db.RestaurantCustomers.Remove(restaurantcustomer);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
+        }
+
+
+        // GET: /RestaurantCustomer/ResultsByName
+        public async Task<ActionResult> ResultsByName(string name)
+        {
+            if (name == null)
+            {
+                ViewBag.errorNoName = "Sorry, you didn't enter a name!";
+                return View("Index");
+            }
+
+            //call method to search for list of customers by customer name
+            List<RestaurantCustomer> customers = RestaurantCustomer.findByName(name);
+
+            if (customers.Count == 0)
+            {
+                ViewBag.errorNoName = "Sorry, no customers with that name!";
+                return View("Index");
+            }
+
+            ViewBag.SecondName = name;
+            return View("Results", customers);
+        }
+
+        // GET: /RestaurantCustomer/ResultsByDate
+        public async Task<ActionResult> ResultsByDate(DateTime BookingDate)
+        {
+            //call method to search for list of customers by customer name
+            List<RestaurantCustomer> customers = RestaurantCustomer.findByDate(BookingDate);
+
+            if (customers.Count == 0)
+            {
+                ViewBag.errorNoDate = "Sorry, no bookings for that Date!";
+                return View("Index");
+            }
+
+            ViewBag.BookingDate = BookingDate;
+            return View("Results", customers);
         }
 
         protected override void Dispose(bool disposing)

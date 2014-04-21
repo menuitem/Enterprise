@@ -218,6 +218,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminConfig.cs" />
     <Compile Include="App_Start\ConfigSingleton.cs" />
+    <Compile Include="Models\Dates.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\RestaurantBooking.cs" />
     <Compile Include="Models\RestaurantCustomer.cs" />
@@ -277,7 +278,7 @@
     <Content Include="Views\Shared\EditorTemplates\SelectRoleEditorViewModel.cshtml" />
     <Content Include="Views\RoomBookings\Create.cshtml" />
     <Content Include="Views\RoomBookings\Delete.cshtml" />
-    <Content Include="Views\RoomBookings\Details.cshtml" />
+    <Content Include="Views\RoomBookings\xxDetails.cshtml" />
     <Content Include="Views\RoomBookings\Edit.cshtml" />
     <Content Include="Views\RoomBookings\xxIndex.cshtml" />
     <Content Include="Views\ReservationCustomers\Create.cshtml" />
@@ -303,15 +304,16 @@
     <Content Include="Views\RoomBookings\AvailabilityExtraRoom.cshtml" />
     <Content Include="Views\RestaurantBooking\Create.cshtml" />
     <Content Include="Views\RestaurantBooking\Delete.cshtml" />
-    <Content Include="Views\RestaurantBooking\Details.cshtml" />
+    <Content Include="Views\RestaurantBooking\xxDetails.cshtml" />
     <Content Include="Views\RestaurantBooking\Edit.cshtml" />
-    <Content Include="Views\RestaurantBooking\Index.cshtml" />
+    <Content Include="Views\RestaurantBooking\xxIndex.cshtml" />
     <Content Include="Views\RestaurantCustomer\Create.cshtml" />
     <Content Include="Views\RestaurantCustomer\Delete.cshtml" />
     <Content Include="Views\RestaurantCustomer\Details.cshtml" />
     <Content Include="Views\RestaurantCustomer\Edit.cshtml" />
     <Content Include="Views\RestaurantCustomer\Index.cshtml" />
     <Content Include="Views\RestaurantBooking\Availability.cshtml" />
+    <Content Include="Views\RestaurantCustomer\Results.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
