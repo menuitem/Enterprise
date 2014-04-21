@@ -210,6 +210,10 @@
     <Compile Include="Migrations\201404201946069_adding_tables_for_restaurant.Designer.cs">
       <DependentUpon>201404201946069_adding_tables_for_restaurant.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201404202200199_add_tablenumber_column.cs" />
+    <Compile Include="Migrations\201404202200199_add_tablenumber_column.Designer.cs">
+      <DependentUpon>201404202200199_add_tablenumber_column.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminConfig.cs" />
@@ -307,6 +311,7 @@
     <Content Include="Views\RestaurantCustomer\Details.cshtml" />
     <Content Include="Views\RestaurantCustomer\Edit.cshtml" />
     <Content Include="Views\RestaurantCustomer\Index.cshtml" />
+    <Content Include="Views\RestaurantBooking\Availability.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -348,6 +353,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201404201946069_adding_tables_for_restaurant.resx">
       <DependentUpon>201404201946069_adding_tables_for_restaurant.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201404202200199_add_tablenumber_column.resx">
+      <DependentUpon>201404202200199_add_tablenumber_column.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -147,13 +147,14 @@ namespace HotelWizard.Controllers
         {
             if (name == null)
             {
-                ViewBag.errorNoName = "Sorry, no customers with that name!";
+                ViewBag.errorNoName = "Sorry, you didn't enter a name!";
                 return View("Index");
             }
 
             //call method to search for list of customers by customer name
             List<RoomCustomer> customers = RoomCustomer.findByName(name);
 
+            if (customers.Count == 0)
             {
                 ViewBag.errorNoName = "Sorry, no customers with that name!";
                 return View("Index");

@@ -18,7 +18,7 @@ namespace HotelWizard.Controllers
         // GET: /RestaurantCustomer/
         public async Task<ActionResult> Index()
         {
-            return View(await db.RestaurantCustomers.ToListAsync());
+            return View();
         }
 
         // GET: /RestaurantCustomer/Details/5

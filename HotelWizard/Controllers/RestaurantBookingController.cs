@@ -129,5 +129,28 @@ namespace HotelWizard.Controllers
             }
             base.Dispose(disposing);
         }
+
+        // POST: /RestaurantBookings/Availability
+        public async Task<ActionResult> Availability(DateTime BookingDate)
+        {
+            //validate dates are not in the past, and checkout is not before checkin
+            //if (!RestaurantBooking.validateDates(BookingDate)
+            //{
+            //    ViewBag.errorMsg = "Dates are before today, or checkout is before checkin";
+            //    return View("../ReservationCustomers/Index");
+            //}
+            //call a method to get a list of available rooms
+            SelectList freeTables = RestaurantBooking.getFreeTables(BookingDate);
+            if (freeTables == null)
+            {
+                ViewBag.errorMsg = "No Available Tables. Please try again";
+                return View("../RestaurantCustomers/Index");
+            }
+
+            //add the select list of available tables and the date to the ViewBag
+            ViewBag.BookingDate = BookingDate;
+            ViewBag.freeTables = freeTables;
+            return View();
+        }
     }
 }

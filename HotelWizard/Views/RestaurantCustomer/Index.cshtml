@@ -1,51 +1,74 @@
-﻿@model IEnumerable<HotelWizard.Models.RestaurantCustomer>
+﻿
+@model HotelWizard.Models.RestaurantBooking
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Restaurant Home";
+}
+<h3>Welcome to the Restaurant Booking Section</h3>
+<hr />
+<h3>Search By Customer Name</h3>
+<h3 style="color:red">@ViewBag.errorNoName</h3>
+<form name="input" action="/RestaurantCustomers/Results" method="post">
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-md-2">Customer Surname:</label>
+            <div class="col-md-10">
+                <input class="text-box single-line" id="name" name="name" type="text" value="">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Search" class="btn btn-default">
+            </div>
+        </div>
+    </div>
+</form>
+
+<h3>Search By Booking Reference</h3>
+<h3 style="color:red">@ViewBag.errorNoBookingRef</h3>
+<form name="input" action="/RestaurantCustomers/ResultsByRef" method="post">
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-md-2">Booking Reference:</label>
+            <div class="col-md-10">
+                <input class="text-box single-line" id="id" name="id" type="text" value="">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Search" class="btn btn-default">
+            </div>
+        </div>
+    </div>
+</form>
+
+<h3>Check Availability and Create New Reservation</h3>
+<h3 style="color:red">@ViewBag.errorMsg</h3>
+@using (Html.BeginForm("Availability", "RestaurantBooking", FormMethod.Post, null))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.Label("Date:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.BookingDate)
+                @Html.ValidationMessageFor(model => model.BookingDate)
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Check Availability" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SecondName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Phone)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SecondName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Phone)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
 }
 
-</table>
+
