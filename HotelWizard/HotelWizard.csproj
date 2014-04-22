@@ -272,7 +272,6 @@
     <Content Include="Views\ReservationCustomers\Delete.cshtml" />
     <Content Include="Views\ReservationCustomers\Details.cshtml" />
     <Content Include="Views\ReservationCustomers\Edit.cshtml" />
-    <Content Include="Views\ReservationCustomers\xxIndex.cshtml" />
     <Content Include="Views\ReservationCustomers\Index.cshtml" />
     <Content Include="Views\ReservationCustomers\Results.cshtml" />
     <Content Include="Views\AdminConfig\Create.cshtml" />
@@ -285,7 +284,6 @@
     <Content Include="Views\Room\Details.cshtml" />
     <Content Include="Views\Room\Edit.cshtml" />
     <Content Include="Views\Room\Index.cshtml" />
-    <Content Include="Views\ReservationCustomers\xxAvailability.cshtml" />
     <Content Include="Views\RoomBookings\AddExtraRoom.cshtml" />
     <Content Include="Views\RoomBookings\Availability.cshtml" />
     <Content Include="Views\RoomBookings\AvailabilityExtraRoom.cshtml" />

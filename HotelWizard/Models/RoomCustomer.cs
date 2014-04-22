@@ -21,7 +21,10 @@ namespace HotelWizard.Models
             ApplicationDbContext db = new ApplicationDbContext();
             string query = "SELECT * FROM RoomCustomers WHERE name = @p0";
             System.Data.Entity.Infrastructure.DbRawSqlQuery<RoomCustomer> data = db.RoomCustomers.SqlQuery(query, name);
+            
+            //convert result of sql query to a list
             List<RoomCustomer> customers = data.ToList();
+    
             return customers;
         }
     }
