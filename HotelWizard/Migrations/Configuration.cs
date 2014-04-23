@@ -32,7 +32,12 @@ namespace HotelWizard.Migrations
 
             success = idManager.CreateRole("HR");
             if (!success) return success;
+            
+            success = idManager.CreateRole("Restaurant");
+            if (!success) return success;
 
+            success = idManager.CreateRole("EventRoom");
+            if (!success) return success;
 
             var newUser = new ApplicationUser()
             {
@@ -51,11 +56,11 @@ namespace HotelWizard.Migrations
             success = idManager.AddUserToRole(newUser.Id, "Admin");
             if (!success) return success;
 
-            success = idManager.AddUserToRole(newUser.Id, "Reception");
-            if (!success) return success;
+            //success = idManager.AddUserToRole(newUser.Id, "Reception");
+            //if (!success) return success;
 
-            success = idManager.AddUserToRole(newUser.Id, "HR");
-            if (!success) return success;
+            //success = idManager.AddUserToRole(newUser.Id, "HR");
+            //if (!success) return success;
 
             return success;
         }

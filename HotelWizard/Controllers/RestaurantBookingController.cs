@@ -16,6 +16,7 @@ namespace HotelWizard.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: /RestaurantBooking/
+        [Authorize(Roles = "Restaurant")]
         public async Task<ActionResult> Index()
         {
             var restaurantbookings = db.RestaurantBookings.Include(r => r.customer);
@@ -23,6 +24,7 @@ namespace HotelWizard.Controllers
         }
 
         // GET: /RestaurantBooking/Details/5
+        [Authorize(Roles = "Restaurant")]
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -38,6 +40,7 @@ namespace HotelWizard.Controllers
         }
 
         // GET: /RestaurantBooking/Create
+        [Authorize(Roles = "Restaurant")]
         public ActionResult Create(int? id)
         {
             ViewBag.customerID = id;
@@ -49,7 +52,8 @@ namespace HotelWizard.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include="RestaurantBookingId,BookingDate,BookingTime,NumOfPeople,customerID,TableNumber")] RestaurantBooking restaurantbooking)
+        [Authorize(Roles = "Restaurant")]
+        public async Task<ActionResult> Create([Bind(Include = "RestaurantBookingId,BookingDate,BookingTime,NumOfPeople,customerID,TableNumber")] RestaurantBooking restaurantbooking)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +66,7 @@ namespace HotelWizard.Controllers
         }
 
         // GET: /RestaurantBooking/Edit/5
+        [Authorize(Roles = "Restaurant")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -82,7 +87,8 @@ namespace HotelWizard.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include="RestaurantBookingId,BookingDate,BookingTime,NumOfPeople,customerID,TableNumber")] RestaurantBooking restaurantbooking)
+        [Authorize(Roles = "Restaurant")]
+        public async Task<ActionResult> Edit([Bind(Include = "RestaurantBookingId,BookingDate,BookingTime,NumOfPeople,customerID,TableNumber")] RestaurantBooking restaurantbooking)
         {
             if (ModelState.IsValid)
             {
@@ -95,6 +101,7 @@ namespace HotelWizard.Controllers
         }
 
         // GET: /RestaurantBooking/Delete/5
+        [Authorize(Roles = "Restaurant")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -112,6 +119,7 @@ namespace HotelWizard.Controllers
         // POST: /RestaurantBooking/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Restaurant")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             RestaurantBooking restaurantbooking = await db.RestaurantBookings.FindAsync(id);
@@ -124,6 +132,7 @@ namespace HotelWizard.Controllers
             //return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "Restaurant")]
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -134,6 +143,7 @@ namespace HotelWizard.Controllers
         }
 
         // POST: /RestaurantBookings/Availability
+        [Authorize(Roles = "Restaurant")]
         public async Task<ActionResult> Availability(DateTime BookingDate)
         {
             //validate query date is not in the past
