@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Reservations Home";
 }
-<img class="small-logo" src="/Images/logo.jpg" />
+<h2>Welcome to the Accommodation Reservations Section</h2>
 <hr/>
 <h3>Search By Customer Name</h3>
 <h3 style="color:red">@ViewBag.errorNoName</h3>
@@ -40,7 +40,7 @@
         </div>
     </div>
 </form>  
-
+<hr id="thick" />
 <h3>Check Availability and Create New Reservation</h3>
 <h3 style="color:red">@ViewBag.errorMsg</h3>
 @using (Html.BeginForm("Availability", "RoomBookings", FormMethod.Post, null))
