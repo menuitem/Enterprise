@@ -29,9 +29,9 @@ namespace HotelWizard.Models
 
             //create a new list, representing all tables up to the total number of tables.
             //the total number of tables is stored as an attribute in the ConfigSingleton class
-            int totalNumberOfRooms = ConfigSingleton.Instance.numRooms;
+            int totalNumberOfTables = ConfigSingleton.Instance.numTables;
             List<int> mylist = new List<int>();
-            for (int i = 1; i <= totalNumberOfRooms; i++)
+            for (int i = 1; i <= totalNumberOfTables; i++)
             {
                 mylist.Add(i);
             }
