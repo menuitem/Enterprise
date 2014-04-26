@@ -31,6 +31,8 @@ namespace HotelWizard.Models
         public System.Data.Entity.DbSet<HotelWizard.Models.RoomBooking> RoomBookings { get; set; }
         public System.Data.Entity.DbSet<HotelWizard.Models.RestaurantCustomer> RestaurantCustomers { get; set; }
         public System.Data.Entity.DbSet<HotelWizard.Models.RestaurantBooking> RestaurantBookings { get; set; }
+        public System.Data.Entity.DbSet<HotelWizard.Models.EventCustomer> EventCustomers { get; set; }
+        public System.Data.Entity.DbSet<HotelWizard.Models.EventBooking> EventBookings { get; set; }
         public System.Data.Entity.DbSet<HotelWizard.Models.Room> Rooms { get; set; }
         public System.Data.Entity.DbSet<HotelWizard.Models.AdminConfig> AdminConfig { get; set; }
     }

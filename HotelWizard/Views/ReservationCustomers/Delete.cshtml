@@ -66,7 +66,13 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="button" value="Cancel" class="btn btn-default" onclick="goBack()" />
         </div>
     }
 </div>
+
+<script>
+    function goBack() {
+        window.history.back()
+    }
+</script>

@@ -1,4 +1,4 @@
-﻿@model HotelWizard.Models.RestaurantBooking
+﻿@model HotelWizard.Models.EventCustomer
 
 @{
     ViewBag.Title = "Delete";
@@ -8,40 +8,39 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>RestaurantBooking</h4>
+    <h4>EventCustomer</h4>
     <hr />
     <dl class="dl-horizontal">
-
         <dt>
-            @Html.DisplayNameFor(model => model.BookingDate)
+            @Html.DisplayNameFor(model => model.FirstName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.BookingDate)
+            @Html.DisplayFor(model => model.FirstName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.BookingTime)
+            @Html.DisplayNameFor(model => model.SecondName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.BookingTime)
+            @Html.DisplayFor(model => model.SecondName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.NumOfPeople)
+            @Html.DisplayNameFor(model => model.Email)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.NumOfPeople)
+            @Html.DisplayFor(model => model.Email)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.TableNumber)
+            @Html.DisplayNameFor(model => model.Phone)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TableNumber)
+            @Html.DisplayFor(model => model.Phone)
         </dd>
 
     </dl>
@@ -55,9 +54,9 @@
         </div>
     }
 </div>
+
 <script>
     function goBack() {
         window.history.back()
     }
 </script>
-

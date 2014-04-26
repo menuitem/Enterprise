@@ -1,0 +1,78 @@
+﻿@model IEnumerable<HotelWizard.Models.EventCustomer>
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Search Results for Event Room Bookings</h2>
+<hr />
+@foreach (var customer in Model)
+{
+    <h4>Customer Details:</h4>
+    <table class="table">
+        <tr>
+            <th>Second Name</th>
+            <th>First Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(model => customer.SecondName)
+            </td>
+            <td>
+                @Html.DisplayFor(model => customer.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(model => customer.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(model => customer.Phone)
+            </td>
+            <td></td>
+            <td>
+                @Html.ActionLink("Select This Customer", "Details", new { id = customer.ID })
+            </td>
+        </tr>
+    </table>
+
+    if (customer.Bookings.Count == 0)
+    {
+        <h2>No Bookings yet for this Customer</h2>
+    }
+    else
+    {
+        <h4>Booking Summary:</h4>
+        <table class="table">
+            <tr>
+                <th>Booking Date</th>
+                <th>Booking Time</th>
+                <th>No. of People</th>
+                <th>Event Type</th>
+            </tr>
+            @foreach (var item in customer.Bookings)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BookingDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BookingTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NumOfPeople)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EventType)
+                    </td>
+
+                    <td></td>
+                </tr>
+            }
+        </table>
+    }
+    <hr id="thick" />
+}
+<p>
+    @Html.ActionLink("Return to Restaurant Home Page", "Index")
+</p>

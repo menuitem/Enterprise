@@ -161,6 +161,8 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminConfigController.cs" />
+    <Compile Include="Controllers\EventBookingController.cs" />
+    <Compile Include="Controllers\EventCustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ReservationCustomersController.cs" />
     <Compile Include="Controllers\RestaurantBookingController.cs" />
@@ -214,13 +216,19 @@
     <Compile Include="Migrations\201404202200199_add_tablenumber_column.Designer.cs">
       <DependentUpon>201404202200199_add_tablenumber_column.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201404260958110_add_event_tables.cs" />
+    <Compile Include="Migrations\201404260958110_add_event_tables.Designer.cs">
+      <DependentUpon>201404260958110_add_event_tables.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminConfig.cs" />
     <Compile Include="App_Start\ConfigSingleton.cs" />
     <Compile Include="Models\Dates.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\EventBooking.cs" />
     <Compile Include="Models\RestaurantBooking.cs" />
+    <Compile Include="Models\EventCustomer.cs" />
     <Compile Include="Models\RestaurantCustomer.cs" />
     <Compile Include="Models\Room.cs" />
     <Compile Include="Models\RoomCustomer.cs" />
@@ -312,6 +320,18 @@
     <Content Include="Views\RestaurantCustomer\Index.cshtml" />
     <Content Include="Views\RestaurantBooking\Availability.cshtml" />
     <Content Include="Views\RestaurantCustomer\Results.cshtml" />
+    <Content Include="Views\EventCustomer\Create.cshtml" />
+    <Content Include="Views\EventCustomer\Delete.cshtml" />
+    <Content Include="Views\EventCustomer\Details.cshtml" />
+    <Content Include="Views\EventCustomer\Edit.cshtml" />
+    <Content Include="Views\EventCustomer\Index.cshtml" />
+    <Content Include="Views\EventBooking\Create.cshtml" />
+    <Content Include="Views\EventBooking\Delete.cshtml" />
+    <Content Include="Views\EventBooking\xxDetails.cshtml" />
+    <Content Include="Views\EventBooking\Edit.cshtml" />
+    <Content Include="Views\EventBooking\xxIndex.cshtml" />
+    <Content Include="Views\EventCustomer\Results.cshtml" />
+    <Content Include="Views\EventBooking\Availability.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -356,6 +376,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201404202200199_add_tablenumber_column.resx">
       <DependentUpon>201404202200199_add_tablenumber_column.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201404260958110_add_event_tables.resx">
+      <DependentUpon>201404260958110_add_event_tables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

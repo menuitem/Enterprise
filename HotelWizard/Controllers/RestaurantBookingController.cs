@@ -16,33 +16,34 @@ namespace HotelWizard.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: /RestaurantBooking/
-        [Authorize(Roles = "Restaurant")]
-        public async Task<ActionResult> Index()
-        {
-            var restaurantbookings = db.RestaurantBookings.Include(r => r.customer);
-            return View(await restaurantbookings.ToListAsync());
-        }
+        //[Authorize(Roles = "Restaurant")]
+        //public async Task<ActionResult> Index()
+        //{
+        //    var restaurantbookings = db.RestaurantBookings.Include(r => r.customer);
+        //    return View(await restaurantbookings.ToListAsync());
+        //}
 
-        // GET: /RestaurantBooking/Details/5
-        [Authorize(Roles = "Restaurant")]
-        public async Task<ActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            RestaurantBooking restaurantbooking = await db.RestaurantBookings.FindAsync(id);
-            if (restaurantbooking == null)
-            {
-                return HttpNotFound();
-            }
-            return View(restaurantbooking);
-        }
+        //// GET: /RestaurantBooking/Details/5
+        //[Authorize(Roles = "Restaurant")]
+        //public async Task<ActionResult> Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    RestaurantBooking restaurantbooking = await db.RestaurantBookings.FindAsync(id);
+        //    if (restaurantbooking == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(restaurantbooking);
+        //}
 
         // GET: /RestaurantBooking/Create
         [Authorize(Roles = "Restaurant")]
         public ActionResult Create(int? id)
         {
+            //send the customer id to the create form via the ViewBag
             ViewBag.customerID = id;
             return View();
         }
@@ -62,6 +63,8 @@ namespace HotelWizard.Controllers
                 return RedirectToAction("Details", "RestaurantCustomer", new { id = restaurantbooking.customerID });
             }
 
+            //send the customer id to the create form via the ViewBag
+            ViewBag.customerID = restaurantbooking.customerID;
             return View(restaurantbooking);
         }
 
@@ -96,7 +99,7 @@ namespace HotelWizard.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Details", "RestaurantCustomer", new { id = restaurantbooking.customerID });
             }
-            //ViewBag.customerID = new SelectList(db.RestaurantCustomers, "ID", "FirstName", restaurantbooking.customerID);
+            
             return View(restaurantbooking);
         }
 
@@ -128,8 +131,8 @@ namespace HotelWizard.Controllers
             db.RestaurantBookings.Remove(restaurantbooking);
             await db.SaveChangesAsync();
 
+            //redirect to the customer details for this bookings
             return RedirectToAction("Details", "RestaurantCustomer", new { id = customerID });
-            //return RedirectToAction("Index");
         }
 
         [Authorize(Roles = "Restaurant")]
@@ -152,12 +155,12 @@ namespace HotelWizard.Controllers
                 ViewBag.errorMsg = "Date is before today";
                 return View("../RestaurantCustomer/Index");
             }
-            //call a method to get a list of available rooms
+            //call a method to get a list of available tables
             SelectList freeTables = RestaurantBooking.getFreeTables(BookingDate);
             if (freeTables == null)
             {
                 ViewBag.errorMsg = "No Available Tables. Please try again";
-                return View("../RestaurantCustomers/Index");
+                return View("../RestaurantCustomer/Index");
             }
 
             //add the select list of available tables and the date to the ViewBag

@@ -1,0 +1,67 @@
+﻿@model HotelWizard.Models.EventBooking
+
+@{
+    ViewBag.Title = "Create";
+    int customerID = ViewBag.customerID;
+    DateTime BookingDate = (DateTime)(Session["BookingDate"]);
+}
+
+<h2>Create Details for Event Room Booking</h2>
+
+<table class="table">
+    <tr>
+        <th>Booking Date</th>
+    </tr>
+    <tr>
+        <td>
+            @BookingDate
+        </td>
+    </tr>
+</table>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>RestaurantBooking</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.Hidden("customerID", customerID)
+        @Html.Hidden("BookingDate", BookingDate)
+     
+        <div class="form-group">
+            @Html.LabelFor(model => model.BookingTime, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.BookingTime)
+                @Html.ValidationMessageFor(model => model.BookingTime)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NumOfPeople, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NumOfPeople)
+                @Html.ValidationMessageFor(model => model.NumOfPeople)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EventType, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EventType)
+                @Html.ValidationMessageFor(model => model.EventType)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Cancel", "Index", "EventCustomer")
+</div>

@@ -17,28 +17,28 @@ namespace HotelWizard.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
          
 
-        // GET: /RoomBookings/
-        public async Task<ActionResult> Index()
-        {
-            var roombookings = db.RoomBookings.Include(r => r.customer);
-            return View(await roombookings.ToListAsync());
-        }
+        //// GET: /RoomBookings/
+        //public async Task<ActionResult> Index()
+        //{
+        //    var roombookings = db.RoomBookings.Include(r => r.customer);
+        //    return View(await roombookings.ToListAsync());
+        //}
 
-        // GET: /RoomBookings/Details/5
-        public async Task<ActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            RoomBooking roombooking = await db.RoomBookings.FindAsync(id);
-            if (roombooking == null)
-            {
-                return HttpNotFound();
-            }
-            roombooking.getCosts();
-            return View(roombooking);
-        }
+        //// GET: /RoomBookings/Details/5
+        //public async Task<ActionResult> Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    RoomBooking roombooking = await db.RoomBookings.FindAsync(id);
+        //    if (roombooking == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    roombooking.getCosts();
+        //    return View(roombooking);
+        //}
 
         //public ActionResult CheckAvailability(int? id){
 
@@ -49,8 +49,7 @@ namespace HotelWizard.Controllers
         // GET: /RoomBookings/Create
         public ActionResult Create(int? id)
         {
-            //ViewBag.roomID = Room.getFreeRooms();
-            //ViewBag.roomID = Room.getAllRooms();
+            //send the customer id to the create form in the ViewBag
             ViewBag.customerID = id;
      
             return View();
@@ -68,22 +67,22 @@ namespace HotelWizard.Controllers
             {
                 db.RoomBookings.Add(roombooking);
                 await db.SaveChangesAsync();
+                //redirect to the customer details for this reservation
                 return RedirectToAction("Details", "ReservationCustomers", new { id = roombooking.customerID });
             }
 
 
-            string query = "SELECT * FROM Rooms";
-            System.Data.Entity.Infrastructure.DbRawSqlQuery<Room> data = db.Rooms.SqlQuery(query);
-            List<int> mylist = new List<int>();
+            //string query = "SELECT * FROM Rooms";
+            //System.Data.Entity.Infrastructure.DbRawSqlQuery<Room> data = db.Rooms.SqlQuery(query);
+            //List<int> mylist = new List<int>();
 
-            foreach (Room e in data.ToList())
-            {
-                mylist.Add(e.RoomId);
-            }
-
-            ViewBag.roomID = new SelectList(mylist);   
-            ViewBag.customerID = roombooking.customerID;
-            
+            //foreach (Room e in data.ToList())
+            //{
+            //    mylist.Add(e.RoomId);
+            //}
+  
+            //send the customer id back to the create form in the ViewBag
+            ViewBag.customerID = roombooking.customerID;           
             return View(roombooking);
         }
 
@@ -100,8 +99,6 @@ namespace HotelWizard.Controllers
                 return HttpNotFound();
             }
 
-            //ViewBag.roomID = Room.getAllRooms();
-            //ViewBag.customerID = new SelectList(db.RoomCustomers, "ID", "name", roombooking.customerID);
             return View(roombooking);
         }
 
@@ -119,7 +116,8 @@ namespace HotelWizard.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Details", "ReservationCustomers", new { id = roombooking.customerID });
             }
-            //ViewBag.customerID = new SelectList(db.RoomCustomers, "ID", "name", roombooking.customerID);
+            //send the customer id back to the edit form in the ViewBag
+            ViewBag.customerID = roombooking.customerID; 
             return View(roombooking);
         }
 

@@ -1,0 +1,69 @@
+﻿@model HotelWizard.Models.EventBooking
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit Event Room Booking Details</h2>
+<table class="table">
+    <tr>
+        <th>Booking Date</th>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(model => model.BookingDate)
+        </td>
+    </tr>
+</table>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Event Room Booking</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        <!--Only certain attibutes are editable, the rest are hidden-->
+        @Html.HiddenFor(model => model.EventBookingId)
+        @Html.HiddenFor(model => model.customerID)
+        @Html.HiddenFor(model => model.BookingDate)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BookingTime, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.BookingTime)
+                @Html.ValidationMessageFor(model => model.BookingTime)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NumOfPeople, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NumOfPeople)
+                @Html.ValidationMessageFor(model => model.NumOfPeople)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EventType, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EventType)
+                @Html.ValidationMessageFor(model => model.EventType)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="button" value="Cancel" class="btn btn-default" onclick="goBack()" />
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    function goBack() {
+        window.history.back()
+    }
+</script>

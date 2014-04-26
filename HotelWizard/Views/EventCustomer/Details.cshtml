@@ -1,0 +1,82 @@
+﻿@model HotelWizard.Models.EventCustomer
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details of Reservations for @Model.FirstName @Model.SecondName</h2>
+<hr />
+<div>
+    <h4>Customer Details:</h4>
+    <table class="table">
+        <tr>
+            <th>Second Name</th>
+            <th>First Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(model => model.SecondName)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Phone)
+            </td>
+            <td></td>
+            <td>
+                @Html.ActionLink("Edit Customer Details", "Edit", new { id = Model.ID }) |
+                @Html.ActionLink("Delete Customer", "Delete", new { id = Model.ID })
+            </td>
+        </tr>
+    </table>
+
+    @if (Model.Bookings.Count == 0)
+    {
+        <h2>No Bookings yet for this Customer</h2>
+    }
+    else
+    {
+        <h4>Booking Summary:</h4>
+        <table class="table">
+            <tr>
+                <th>Booking Date</th>
+                <th>Booking Time</th>
+                <th>No. of People</th>
+                <th>Event Type</th>
+            </tr>
+            @foreach (var item in Model.Bookings)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BookingDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BookingTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NumOfPeople)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EventType)
+                    </td>
+
+                    <td>
+                        @Html.ActionLink("Edit Booking Details", "Edit", "EventBooking",
+                            new { id = item.EventBookingId }, null) |
+                        @Html.ActionLink("Delete Booking", "Delete", "EventBooking", new { id = item.EventBookingId }, null)
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+</div>
+<p>
+    @Html.ActionLink("Return to Event Room Home Page", "Index")
+</p>
+
