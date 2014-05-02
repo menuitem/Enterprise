@@ -25,21 +25,21 @@ namespace HotelWizard.Controllers
         //}
 
         //// GET: /RoomBookings/Details/5
-        //public async Task<ActionResult> Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    RoomBooking roombooking = await db.RoomBookings.FindAsync(id);
-        //    if (roombooking == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    roombooking.getCosts();
-        //    return View(roombooking);
-        //}
-
+        [Authorize(Roles = "Reception")]
+        public async Task<ActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            RoomBooking roombooking = await db.RoomBookings.FindAsync(id);
+            if (roombooking == null)
+            {
+                return HttpNotFound();
+            }
+            roombooking.getCosts();
+            return View(roombooking);
+        }
         //public ActionResult CheckAvailability(int? id){
 
 
