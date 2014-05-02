@@ -16,12 +16,14 @@ namespace HotelWizard.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: /EventCustomer/
+        [Authorize(Roles = "EventRoom")]
         public async Task<ActionResult> Index()
         {
             return View();
         }
 
         // GET: /EventCustomer/Details/5
+        [Authorize(Roles = "EventRoom")]
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -36,6 +38,7 @@ namespace HotelWizard.Controllers
             return View(eventcustomer);
         }
 
+        [Authorize(Roles = "EventRoom")]
         public async Task<ActionResult> CreateNew(DateTime BookingDate)
         {
             //add selected dateto the session, so it can 
@@ -49,6 +52,7 @@ namespace HotelWizard.Controllers
         }
 
         // GET: /EventCustomer/Create
+        [Authorize(Roles = "EventRoom")]
         public ActionResult Create()
         {
             return View();
@@ -73,6 +77,7 @@ namespace HotelWizard.Controllers
         }
 
         // GET: /EventCustomer/Edit/5
+        [Authorize(Roles = "EventRoom")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -92,7 +97,8 @@ namespace HotelWizard.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include="ID,FirstName,SecondName,Email,Phone")] EventCustomer eventcustomer)
+        [Authorize(Roles = "EventRoom")]
+        public async Task<ActionResult> Edit([Bind(Include = "ID,FirstName,SecondName,Email,Phone")] EventCustomer eventcustomer)
         {
             if (ModelState.IsValid)
             {
@@ -104,6 +110,7 @@ namespace HotelWizard.Controllers
         }
 
         // GET: /EventCustomer/Delete/5
+        [Authorize(Roles = "EventRoom")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -121,6 +128,7 @@ namespace HotelWizard.Controllers
         // POST: /EventCustomer/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "EventRoom")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             EventCustomer eventcustomer = await db.EventCustomers.FindAsync(id);
@@ -130,6 +138,7 @@ namespace HotelWizard.Controllers
         }
 
         // GET: /EventCustomer/ResultsByName
+        [Authorize(Roles = "EventRoom")]
         public async Task<ActionResult> ResultsByName(string name)
         {
             if (name == null)
@@ -152,7 +161,7 @@ namespace HotelWizard.Controllers
         }
 
         // GET: /EventCustomer/ResultsByDate
-        //[Authorize(Roles = "Restaurant")]
+        [Authorize(Roles = "EventRoom")]
         public async Task<ActionResult> ResultsByDate(DateTime BookingDate)
         {
             //call method to search for list of customers by customer name

@@ -14,31 +14,7 @@ namespace HotelWizard.Controllers
     public class RestaurantBookingController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
-        // GET: /RestaurantBooking/
-        //[Authorize(Roles = "Restaurant")]
-        //public async Task<ActionResult> Index()
-        //{
-        //    var restaurantbookings = db.RestaurantBookings.Include(r => r.customer);
-        //    return View(await restaurantbookings.ToListAsync());
-        //}
-
-        //// GET: /RestaurantBooking/Details/5
-        //[Authorize(Roles = "Restaurant")]
-        //public async Task<ActionResult> Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    RestaurantBooking restaurantbooking = await db.RestaurantBookings.FindAsync(id);
-        //    if (restaurantbooking == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(restaurantbooking);
-        //}
-
+  
         // GET: /RestaurantBooking/Create
         [Authorize(Roles = "Restaurant")]
         public ActionResult Create(int? id)

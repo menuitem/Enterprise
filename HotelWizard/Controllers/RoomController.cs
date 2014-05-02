@@ -16,12 +16,14 @@ namespace HotelWizard.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
   
         // GET: /Room/
+        [Authorize(Roles = "Reception")]
         public async Task<ActionResult> Index()
         {
             return View(await db.Rooms.ToListAsync());
         }
 
         // GET: /Room/Details/5
+        [Authorize(Roles = "Reception")]
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -37,6 +39,7 @@ namespace HotelWizard.Controllers
         }
 
         // GET: /Room/Create
+        [Authorize(Roles = "Reception")]
         public ActionResult Create()
         {
             //the number of rooms is stored in a singleton class called 'config'
@@ -60,7 +63,8 @@ namespace HotelWizard.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include="RoomId,roomNum,roomRate,roomType")] Room room)
+        [Authorize(Roles = "Reception")]
+        public async Task<ActionResult> Create([Bind(Include = "RoomId,roomNum,roomRate,roomType")] Room room)
         {
             if (ModelState.IsValid)
             {
@@ -89,6 +93,7 @@ namespace HotelWizard.Controllers
         }
 
         // GET: /Room/Edit/5
+        [Authorize(Roles = "Reception")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -108,7 +113,8 @@ namespace HotelWizard.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include="RoomId,roomNum,roomRate,roomType")] Room room)
+        [Authorize(Roles = "Reception")]
+        public async Task<ActionResult> Edit([Bind(Include = "RoomId,roomNum,roomRate,roomType")] Room room)
         {
             if (ModelState.IsValid)
             {
@@ -120,6 +126,7 @@ namespace HotelWizard.Controllers
         }
 
         // GET: /Room/Delete/5
+        [Authorize(Roles = "Reception")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -137,6 +144,7 @@ namespace HotelWizard.Controllers
         // POST: /Room/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Reception")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Room room = await db.Rooms.FindAsync(id);

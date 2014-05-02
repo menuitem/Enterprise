@@ -4,7 +4,7 @@
     ViewBag.Title = "User Roles";
 }
 
-<h2>Roles for user @Html.DisplayFor(model => model.UserName)</h2>
+<h2>Roles for @Html.DisplayFor(model => model.UserName)</h2>
 <hr />
 
 @using (Html.BeginForm("UserRoles", "Account", FormMethod.Post, new { encType = "multipart/form-data", name = "myform" }))

@@ -15,29 +15,8 @@ namespace HotelWizard.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        //// GET: /EventBooking/
-        //public async Task<ActionResult> Index()
-        //{
-        //    var eventbookings = db.EventBookings.Include(e => e.customer);
-        //    return View(await eventbookings.ToListAsync());
-        //}
-
-        //// GET: /EventBooking/Details/5
-        //public async Task<ActionResult> Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    EventBooking eventbooking = await db.EventBookings.FindAsync(id);
-        //    if (eventbooking == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(eventbooking);
-        //}
-
         // GET: /EventBooking/Create
+        [Authorize(Roles = "EventRoom")]
         public ActionResult Create(int? id)
         {
             //send the customer id to the create form in the ViewBag
@@ -49,6 +28,7 @@ namespace HotelWizard.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "EventRoom")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include="EventBookingId,BookingDate,BookingTime,EventType,NumOfPeople,customerID")] EventBooking eventbooking)
         {
@@ -66,6 +46,7 @@ namespace HotelWizard.Controllers
         }
 
         // GET: /EventBooking/Edit/5
+        [Authorize(Roles = "EventRoom")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -88,7 +69,8 @@ namespace HotelWizard.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include="EventBookingId,BookingDate,BookingTime,EventType,NumOfPeople,customerID")] EventBooking eventbooking)
+        [Authorize(Roles = "EventRoom")]
+        public async Task<ActionResult> Edit([Bind(Include = "EventBookingId,BookingDate,BookingTime,EventType,NumOfPeople,customerID")] EventBooking eventbooking)
         {
             if (ModelState.IsValid)
             {
@@ -104,6 +86,7 @@ namespace HotelWizard.Controllers
         }
 
         // GET: /EventBooking/Delete/5
+        [Authorize(Roles = "EventRoom")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -121,6 +104,7 @@ namespace HotelWizard.Controllers
         // POST: /EventBooking/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "EventRoom")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             EventBooking eventbooking = await db.EventBookings.FindAsync(id);
@@ -132,6 +116,7 @@ namespace HotelWizard.Controllers
             return RedirectToAction("Details", "EventCustomer", new { id = customerID });
         }
 
+        [Authorize(Roles = "EventRoom")]
         public async Task<ActionResult> Availability(DateTime BookingDate)
         {
             //validate query date is not in the past

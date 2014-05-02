@@ -33,7 +33,7 @@
                     @if (User.IsInRole("Admin"))
                     {
                         <li>@Html.ActionLink("HotelConfigurations", "Index", "AdminConfig")</li>
-                        <li>@Html.ActionLink("Users", "Index", "Account")</li>
+                        <li>@Html.ActionLink("Hotel Employees", "Index", "Account")</li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")

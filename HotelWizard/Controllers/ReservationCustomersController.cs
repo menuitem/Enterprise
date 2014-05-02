@@ -17,6 +17,7 @@ namespace HotelWizard.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: /ReservationCustomers/
+        [Authorize(Roles = "Reception")]
         public async Task<ActionResult> Index()
         {
             //return View(await db.RoomCustomers.ToListAsync());
@@ -24,6 +25,7 @@ namespace HotelWizard.Controllers
         }
 
         // GET: /ReservationCustomers/Details/5
+        [Authorize(Roles = "Reception")]
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -43,6 +45,7 @@ namespace HotelWizard.Controllers
         }
 
         // GET: /ReservationCustomers/Create
+        [Authorize(Roles = "Reception")]
         public ActionResult Create()//DateTime checkin, DateTime checkout, int roomId)
         {
             //Session.Add("checkin", checkin);
@@ -58,7 +61,8 @@ namespace HotelWizard.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include="ID,name,firstname,email,phone,address,nationality")] RoomCustomer roomcustomer)
+        [Authorize(Roles = "Reception")]
+        public async Task<ActionResult> Create([Bind(Include = "ID,name,firstname,email,phone,address,nationality")] RoomCustomer roomcustomer)
         {
             if (ModelState.IsValid)
             {
@@ -72,6 +76,7 @@ namespace HotelWizard.Controllers
         }
 
         // GET: /ReservationCustomers/Edit/5
+        [Authorize(Roles = "Reception")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -91,7 +96,8 @@ namespace HotelWizard.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include="ID,name,firstname,email,phone,address,nationality")] RoomCustomer roomcustomer)
+        [Authorize(Roles = "Reception")]
+        public async Task<ActionResult> Edit([Bind(Include = "ID,name,firstname,email,phone,address,nationality")] RoomCustomer roomcustomer)
         {
             if (ModelState.IsValid)
             {
@@ -103,6 +109,7 @@ namespace HotelWizard.Controllers
         }
 
         // GET: /ReservationCustomers/Delete/5
+        [Authorize(Roles = "Reception")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -120,6 +127,7 @@ namespace HotelWizard.Controllers
         // POST: /ReservationCustomers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Reception")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             RoomCustomer roomcustomer = await db.RoomCustomers.FindAsync(id);
@@ -136,6 +144,7 @@ namespace HotelWizard.Controllers
         //}
 
         // GET: /Customer/Search
+        [Authorize(Roles = "Reception")]
         public async Task<ActionResult> SearchByRef()
         {
 
@@ -143,6 +152,7 @@ namespace HotelWizard.Controllers
         }
 
         // GET: /ReservationCustomer/Results
+        [Authorize(Roles = "Reception")]
         public async Task<ActionResult> Results(string name)
         {
             if (name == null)
@@ -173,6 +183,7 @@ namespace HotelWizard.Controllers
         }
 
         // GET: /ReservationCustomer/Index
+        [Authorize(Roles = "Reception")]
         public async Task<ActionResult> ResultsByRef(string id)
         {
             int roombookingId = Convert.ToInt32(id);
@@ -189,6 +200,7 @@ namespace HotelWizard.Controllers
             return RedirectToAction("Details/" + roombooking.customerID);
         }
 
+        [Authorize(Roles = "Reception")]
         public async Task<ActionResult> CreateNew(DateTime checkin, DateTime checkout, int roomId)
         {
             //add selected dates and room number to the session, so they can 

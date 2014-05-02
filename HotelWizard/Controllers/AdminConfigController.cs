@@ -39,29 +39,29 @@ namespace HotelWizard.Controllers
         }
 
         // GET: /AdminConfig/Create
-        [Authorize(Roles = "Admin")]
-        public ActionResult Create()
-        {
-            return View();
-        }
+        //[Authorize(Roles = "Admin")]
+        //public ActionResult Create()
+        //{
+        //    return View();
+        //}
 
-        // POST: /AdminConfig/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
-        public async Task<ActionResult> Create([Bind(Include="AdminConfigId,HotelName,HotelAddress,NumOfRooms,NumOfTables")] AdminConfig adminconfig)
-        {
-            if (ModelState.IsValid)
-            {
-                db.AdminConfig.Add(adminconfig);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
+        //// POST: /AdminConfig/Create
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //[Authorize(Roles = "Admin")]
+        //public async Task<ActionResult> Create([Bind(Include="AdminConfigId,HotelName,HotelAddress,NumOfRooms,NumOfTables")] AdminConfig adminconfig)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.AdminConfig.Add(adminconfig);
+        //        await db.SaveChangesAsync();
+        //        return RedirectToAction("Index");
+        //    }
 
-            return View(adminconfig);
-        }
+        //    return View(adminconfig);
+        //}
 
         // GET: /AdminConfig/Edit/5
         [Authorize(Roles = "Admin")]

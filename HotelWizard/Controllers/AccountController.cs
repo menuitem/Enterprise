@@ -65,6 +65,11 @@ namespace HotelWizard.Controllers
                         return RedirectToAction("Index", "RestaurantCustomer");
 
                     }
+                    if (roles.Contains("EventRoom"))
+                    {
+                        return RedirectToAction("Index", "RoomBookings");
+
+                    }
                     //return RedirectToLocal(returnUrl);
                 }
                 else

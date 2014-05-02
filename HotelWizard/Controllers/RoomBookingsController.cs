@@ -47,6 +47,7 @@ namespace HotelWizard.Controllers
         //}
 
         // GET: /RoomBookings/Create
+        [Authorize(Roles = "Reception")]
         public ActionResult Create(int? id)
         {
             //send the customer id to the create form in the ViewBag
@@ -60,7 +61,8 @@ namespace HotelWizard.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include="RoomBookingId,checkin,checkout,specialRate,RoomId,numPeople,isDepositPaid,isCheckedIn,isCheckedOut,customerID")] RoomBooking roombooking)
+        [Authorize(Roles = "Reception")]
+        public async Task<ActionResult> Create([Bind(Include = "RoomBookingId,checkin,checkout,specialRate,RoomId,numPeople,isDepositPaid,isCheckedIn,isCheckedOut,customerID")] RoomBooking roombooking)
         {
             
             if (ModelState.IsValid)
@@ -87,6 +89,7 @@ namespace HotelWizard.Controllers
         }
 
         // GET: /RoomBookings/Edit/5
+        [Authorize(Roles = "Reception")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -107,6 +110,7 @@ namespace HotelWizard.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Reception")]
         public async Task<ActionResult> Edit([Bind(Include = "RoomBookingId,roomID,checkin,checkout,specialRate,numPeople,isDepositPaid,isCheckedIn,isCheckedOut,customerID")] RoomBooking roombooking)
         {
             
@@ -122,6 +126,7 @@ namespace HotelWizard.Controllers
         }
 
         // GET: /RoomBookings/Delete/5
+        [Authorize(Roles = "Reception")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -139,6 +144,7 @@ namespace HotelWizard.Controllers
         // POST: /RoomBookings/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Reception")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             RoomBooking roombooking = await db.RoomBookings.FindAsync(id);
@@ -150,6 +156,7 @@ namespace HotelWizard.Controllers
         }
 
         // POST: /RoomBookings/Availability
+        [Authorize(Roles = "Reception")]
         public async Task<ActionResult> Availability(DateTime checkin, DateTime checkout)
         {
             //validate dates are not in the past, and checkout is not before checkin
@@ -174,6 +181,7 @@ namespace HotelWizard.Controllers
         }
 
         //Add and extra room booking to existing customer
+        [Authorize(Roles = "Reception")]
         public async Task<ActionResult> AddExtraRoom(int? customerID)
         {
             ViewBag.customerID = customerID;
@@ -182,6 +190,7 @@ namespace HotelWizard.Controllers
         }
 
         // POST: /RoomBookings/AvailabilityExtraRoom
+        [Authorize(Roles = "Reception")]
         public async Task<ActionResult> AvailabilityExtraRoom(DateTime checkin, DateTime checkout, int customerID)
         {
             //validate dates are not in the past, and checkout is not before checkin
@@ -211,6 +220,7 @@ namespace HotelWizard.Controllers
         
         }
 
+        [Authorize(Roles = "Reception")]
         public async Task<ActionResult> CreateExtra(DateTime checkin, DateTime checkout, int roomId, int customerID)
         {
             //add selected dates and room number to the session, so they can 
