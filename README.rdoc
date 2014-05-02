@@ -1,0 +1,11 @@
+==Hotel Wizard Project
+
+Application for Enterprise Framework Course
+
+* C#
+* MVC
+* Entity Framework
+* Code First
+
+
+Deployed at: http://hotelwizard.azurewebsites.net/
